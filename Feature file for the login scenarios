@@ -1,0 +1,9 @@
+Feature:
+
+Scenario:
+login should be fail
+
+  Given user should be navigate to the application
+  And user enter the invalid credential
+  When user click the login button
+  But login should be fail

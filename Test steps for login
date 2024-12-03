@@ -9,9 +9,11 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import cucumber.api.java.After;
+import cucumber.api.java.Before;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.But;
 import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -30,14 +32,19 @@ public class loginsteps {
 			driver.findElement(password).clear();
 			driver.findElement(password).sendKeys(pass);
 		}
+@Before
+public void broweserLaunch() {
+	 	
+	 	WebDriverManager.chromedriver().setup();
+	     driver = new ChromeDriver();
+	 	
+	 }
 @Given("user should be navigate to the application")
 public void usershouldnavtigatetourl() {
 	
-	WebDriverManager.chromedriver().setup();
-    driver = new ChromeDriver();
 	driver.get("https://howzu.appkodes.in/web/login");
-	driver.manage().window().maximize();
-	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+ 	driver.manage().window().maximize();
+ 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
 }
 
@@ -59,11 +66,39 @@ public void loginShouldBeFail() {
 
 	// Assert that the current URL equals the expected URL
     Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
-
 }
 
+@Given("user should be navigate to application")
+public void usernavtigatetourl() {
+	
+	driver.get("https://howzu.appkodes.in/web/login");
+	driver.manage().window().maximize();
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+}
+
+@And("user enter the valid credential")
+public void userEnterThevalidLogin() throws Throwable {
+	logindetails("demo@howzu.com","123456");
+}
+@When("user click login button")
+public void userClickLoginButton() throws Throwable {
+	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+}
+
+@But("login should be pass")
+public void loginShouldBePass() throws Throwable {
+	Thread.sleep(3000);
+
+	String currentURL = driver.getCurrentUrl();
+	String expectedURL = "https://howzu.appkodes.in/web/app"; // Replace with the expected URL
+
+	// Assert that the current URL equals the expected URL
+    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
+
+}
 @After
 public void tearDown() {
         driver.quit();
 }
+
 }

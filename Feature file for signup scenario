@@ -1,21 +1,23 @@
 Feature:
 
+Background:
+   Given user should navigate to the URL
+   Then click the signup option 
+
+
 Scenario:
 sign up should be fail 
 
-   Given user should navigate to the link 
-   And user click the sign up button without filling the required fields
    When user clicking the sign up button 
    But sign up should be fail
 
-Scenario:
+Scenario Outline:
 sign up should be pass
 
-   Given user should be navigate to the given URL
-   And user enter the name as name123
-   And user enter the email as email@yopmail.com
-   And user enter the password as 123456
-   Then user choose the DOB as 22/02/2002
+   And user enter the name as "<name>"
+   And user enter the email as "<email>"
+   And user enter the password as "<password>"
+   Then user choose the DOB
    Then user choose the gender as female
    When user click sign up button
    Then user should be show next page
@@ -23,7 +25,6 @@ sign up should be pass
    When user click the next button
    Then user should be redirect to the upload profile page
    And user upload the photo for the profile image
-   When user click the skip or next button
    Then user should be redirect to the select interest page
    And user search and choose interest as photo
    When user click the save button
@@ -32,4 +33,7 @@ sign up should be pass
    When user click the join with site name button
    Then user account should be sign up
    
-   
+ Examples:
+ 
+     |name  |     email        | password|
+     |kannansh|kannan332@yopmail.com|  123456 |

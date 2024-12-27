@@ -1,0 +1,230 @@
+package steps;
+
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import steps.LaunchAndTearDown;
+
+public class Signup{
+	
+	public WebDriver driver=LaunchAndTearDown.getdriver();
+
+	// signup without user credentials
+
+@Then("click the signup option")
+public void moveTosignup() throws Throwable {
+    Thread.sleep(3000);
+	driver.findElement(By.id("signup-link")).click();
+}
+
+@When("user clicking the sign up button")
+public void userClickingTheSignUpButton() {
+
+	WebElement element = driver.findElement(By.cssSelector("div#signup>form>div:nth-of-type(7)>button"));
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+}
+
+@But("sign up should be fail")
+public void signUpShouldBeFail() {
+	String currentURL= driver.getCurrentUrl();
+	String expectedURL = "https://howzu.appkodes.in/web/login";
+	
+    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
+}
+
+//Signup should be pass
+
+@And("user enter the name as {string}")
+public void userEnterTheNameAsName(String name) {
+    
+	driver.findElement(By.id("name")).sendKeys(name);
+}
+
+@And("user enter the email as {string}")
+public void userEnterTheEmailAsEmailYopmailCom(String email) {
+   
+	driver.findElement(By.id("email")).sendKeys(email);
+
+}
+
+@Given("user enter the password as {string}")
+public void userEnterThePasswordAs(String password) {
+    
+	driver.findElement(By.id("password")).sendKeys(password);
+}
+
+@Then("user choose the DOB")
+public void userChooseTheDOBAs() {
+ 
+	driver.findElement(By.xpath("//button[@class='react-date-picker__calendar-button react-date-picker__button']")).click();
+	for(int i=0;i<=9;i++) {
+		driver.findElement(By.xpath("//button[@class='react-calendar__navigation__arrow react-calendar__navigation__prev-button']")).click();
+	}
+	for(int j=0;j<=3;j++) {
+		driver.findElement(By.xpath("//button[@class='react-calendar__navigation__arrow react-calendar__navigation__prev2-button']")).click();
+	}
+	driver.findElement(By.xpath("//abbr[normalize-space(text())='22']")).click();
+
+}
+
+@Then("user choose the gender as female")
+public void userChooseTheGenderAsFemale() {
+
+	WebElement element = driver.findElement(By.xpath("//div[@class='col-5 col-sm-3']//label[1]"));
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+
+}
+
+@When("user click sign up button")
+public void userClickSignUpButton() {
+    
+	WebElement element = driver.findElement(By.cssSelector("div#signup>form>div:nth-of-type(7)>button"));
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+}
+
+@Then("user should be show next page")
+public void userShouldBeShowNextPage() throws Throwable {
+   
+	Thread.sleep(5000);
+	String title= driver.findElement(By.xpath("(//h4[@class='modal-title'])[1]")).getText();
+	String expectedTitle="Iam here to";
+	
+	Assert.assertTrue(title.equals(expectedTitle),"The title is not matched");
+}
+
+@Then("user choose the i am here to as friend")
+public void userChooseTheIAmHereToAsFriend() {
+	
+	driver.findElement(By.xpath("//img[@alt='1']")).click();
+
+}
+
+@When("user click the next button")
+public void userClickTheNextButton() {
+   
+	driver.findElement(By.xpath("//button[@class='btn-common btn-block']")).click();
+
+}
+
+@Then("user should be redirect to the upload profile page")
+public void userShouldBeRedirectToTheUploadProfilePage() {
+	
+	String profiletitle= driver.findElement(By.xpath("//div[contains(@class,'text-center apk-30')]")).getText();
+	String expectedTitle="Upload great photos";
+	
+	Assert.assertTrue(profiletitle.equals(expectedTitle),"The profile page title is not matched");
+	
+}
+
+@Then("user upload the photo for the profile image")
+public void userUploadThePhotoForTheProfileImage()  {
+	
+    driver.findElement(By.xpath("(//span[contains(@class,'apk-18 bold-font')])[1]")).click();
+
+    /*StringSelection selection=new StringSelection("/home/hts-acer/Downloads/sam.jpg");
+	Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
+	
+	Robot robot=new Robot();
+	robot.keyPress(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_V);
+	robot.keyRelease(KeyEvent.VK_V);
+	robot.keyRelease(KeyEvent.VK_CONTROL);
+	robot.keyPress(KeyEvent.VK_ENTER);
+	robot.keyRelease(KeyEvent.VK_ENTER);*/
+	
+}
+
+@Then("user should be redirect to the select interest page")
+public void userShouldBeRedirectToTheSelectInterestPage() throws Throwable {
+
+	Thread.sleep(5000);
+	String interesttitle= driver.findElement(By.xpath("(//h4[@class='modal-title'])[2]")).getText();
+	String expectedTitle="Interest";
+	
+	Assert.assertTrue(interesttitle.equals(expectedTitle),"The interest page title is not matched");
+}
+
+@Then("user search and choose interest as photo")
+public void userSearchAndChooseInterestAsPhoto() {
+   
+	driver.findElement(By.xpath("//input[@placeholder='Search Interest']")).sendKeys("photo");
+	driver.findElement(By.xpath("//label[contains(@class,'interst-option amb0')]")).click();
+
+}
+
+@When("user click the save button")
+public void userClickTheSaveButton() {
+
+	driver.findElement(By.xpath("(//button[@type='submit'])[3]")).click();
+
+}
+
+@Then("user should be redirect to the choose location page")
+public void userShouldBeRedirectToTheChooseLocationPage() {
+   
+	String locationtitle= driver.findElement(By.xpath("(//h4[@class='modal-title'])[3]")).getText();
+	String expectedTitle="Location";
+	
+	Assert.assertTrue(locationtitle.equals(expectedTitle),"The Location page title is not matched");
+}
+
+@Then("user enter the location and choose it from the drop down suggestion")
+public void userEnterTheLocationAndChooseItFromTheDropDownSuggestion() throws Throwable {
+   
+	
+	driver.findElement(By.cssSelector(".pac-target-input")).sendKeys("Madurai, Tamil Nadu, India");
+	Thread.sleep(3000);
+    List<WebElement> suggestions = driver.findElements(By.className("pac-item"));
+    for (WebElement suggestion : suggestions) {
+        if (suggestion.getText().contains("Madurai, Tamil Nadu, India")) { // Replace with desired suggestion
+            suggestion.click();
+            break;
+        }
+    }
+	
+}
+
+@When("user click the join with site name button")
+public void userClickTheJoinWithSiteNameButton() throws Throwable {
+     Thread.sleep(3000);
+	driver.findElement(By.xpath("//button[@type='Submit']")).click();
+
+}
+
+@Then("user account should be sign up")
+public void userAccountShouldBeSignUp() throws Throwable {
+	
+Thread.sleep(3000);
+
+String SignupURL= driver.getCurrentUrl();
+String expectedTitle="https://howzu.appkodes.in/web/app/PeopleNear";
+	
+Assert.assertTrue(SignupURL.equals(expectedTitle),"Signup test case is failed");
+	
+}
+
+}

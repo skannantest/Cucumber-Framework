@@ -1,28 +1,43 @@
-package steps;
+package Hooks;
 
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class LaunchAndTearDown {
-	static WebDriver driver;
-
+public class hook {
+	public static WebDriver driver;
+    
 	@Before
-	public void broweserLaunch() {
+	public void broweserLaunch(Scenario scenario) {
 		 	
-		 	WebDriverManager.chromedriver().setup();
-		     driver = new ChromeDriver();
-		 	
+           WebDriverManager.chromedriver().setup();
+		   driver = new ChromeDriver();
+		   String name = scenario.getName();
+			System.out.println("Scenario name is "+name);
 		 }
-	@After
-	public void tearDown() {
+@After
+public void afterscenario(Scenario scenario) {
+		
+		boolean failed = scenario.isFailed();
+		if(failed) {
+			byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+			scenario.embed(screenshot, "image/png");
+			System.out.println("Scenario is failed"+failed);
+
+		}
 	        driver.quit();
 	}
 	public static WebDriver getdriver() {
 		return driver;
 	}
 }
+
 

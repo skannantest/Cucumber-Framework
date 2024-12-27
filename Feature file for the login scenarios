@@ -1,9 +1,11 @@
 Feature:
 
+Background:
+  Given user should be navigate to the application
+
 Scenario:
 login should be fail
 
-  Given user should be navigate to the application
   And user enter the invalid credential
   When user click the login button
   But login should be fail
@@ -11,14 +13,12 @@ login should be fail
  Scenario:
  login should be fail
  
-  Given user should be navigate to the link
   And user click the login button without enter the email and password
   Then login should fail
   
  Scenario:
  login should be pass
 
-  Given user should be navigate to application
   And user enter the valid credential
   When user click login button
   Then login should be pass

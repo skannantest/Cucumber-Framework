@@ -5,11 +5,13 @@ import cucumber.api.SnippetType;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
-		features = {"src/test/java/features/login.features"},
-		dryRun = !true,
-	    glue = "steps",
+		
+		features = {"src/test/java/features/loginsteps.features","src/test/java/features/Signup.features"},
+		//dryRun = !true,
+	    glue = {"steps","Hooks"},
 	    snippets= SnippetType.CAMELCASE,
-	    monochrome=true
+	    monochrome=true,
+	    plugin= {"pretty","html:reports"}
 		)
 public class runner extends AbstractTestNGCucumberTests{
 

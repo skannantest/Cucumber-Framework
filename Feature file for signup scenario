@@ -4,13 +4,6 @@ Background:
    Given user should navigate to the URL
    Then click the signup option 
 
-
-Scenario:
-sign up should be fail 
-
-   When user clicking the sign up button 
-   But sign up should be fail
-
 Scenario Outline:
 sign up should be pass
 
@@ -36,4 +29,15 @@ sign up should be pass
  Examples:
  
      |name  |     email        | password|
-     |kannansh|kannan332@yopmail.com|  123456 |
+     |kannansh|kannan333222@yopmail.com|  123456 |
+
+Scenario:
+sign up should be fail 
+
+   Given user enter the name as taylor
+   And user enter the already registered email ID as kannan33322@yopmail.com
+   And user enter the password as 123456
+   And user choose the Date of birth 
+   Then user choose gender as female
+   When user clicking the sign up button 
+   But sign up should be fail

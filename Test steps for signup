@@ -37,7 +37,6 @@ public class Signup{
 	
 	public WebDriver driver=hook.getdriver();
 
-	// signup without user credentials
 
 @Given("user should navigate to the URL")
 public void navigateToURL() {
@@ -51,21 +50,6 @@ public void navigateToURL() {
 public void moveTosignup() throws Throwable {
     Thread.sleep(3000);
 	driver.findElement(By.id("signup-link")).click();
-}
-
-@When("user clicking the sign up button")
-public void userClickingTheSignUpButton() {
-
-	WebElement element = driver.findElement(By.cssSelector("div#signup>form>div:nth-of-type(7)>button"));
-	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
-}
-
-@But("sign up should be fail")
-public void signUpShouldBeFail() {
-	String currentURL= driver.getCurrentUrl();
-	String expectedURL = "https://howzu.appkodes.in/web/login";
-	
-    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
 }
 
 //Signup should be pass
@@ -115,7 +99,7 @@ public void userChooseTheGenderAsFemale() {
 public void userClickSignUpButton() {
     
 	WebElement element = driver.findElement(By.cssSelector("div#signup>form>div:nth-of-type(7)>button"));
-	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element); // element hide in the footer so we have used javaScriptExecutor
 }
 
 @Then("user should be show next page")
@@ -239,5 +223,62 @@ public void userAccountShouldBeSignUp() throws Throwable {
 	Assert.assertTrue(SignupURL.equals(expectedTitle),"Signup test case is failed");
 	
 }
+
+// Signup should be fail
+
+@Given("user enter the name as taylor")
+public void userEnterTheNameAsTaylor() {
+
+	driver.findElement(By.id("name")).sendKeys("taylor");
+}
+
+@Given("user enter the already registered email ID as kannan33322@yopmail.com")
+public void userEnterTheAlreadyRegisteredEmailIDAsKannanYopmailCom() {
+  
+	driver.findElement(By.id("email")).sendKeys("kannan333222@yopmail.com");
+}
+
+@Given("user enter the password as 123456")
+public void userEnterThePasswordAs() {
+    
+	driver.findElement(By.id("password")).sendKeys("123456");
+}
+
+@Then("user choose the Date of birth")
+public void userChooseTheDOB() {
+ 
+	driver.findElement(By.xpath("//button[@class='react-date-picker__calendar-button react-date-picker__button']")).click();
+	for(int i=0;i<=9;i++) {
+		driver.findElement(By.xpath("//button[@class='react-calendar__navigation__arrow react-calendar__navigation__prev-button']")).click();
+	}
+	for(int j=0;j<=3;j++) {
+		driver.findElement(By.xpath("//button[@class='react-calendar__navigation__arrow react-calendar__navigation__prev2-button']")).click();
+	}
+	driver.findElement(By.xpath("//abbr[normalize-space(text())='22']")).click();
+
+}
+
+
+@Then("user choose gender as female")
+public void userChooseGenderAsOther() {
+  
+	WebElement element = driver.findElement(By.xpath("//div[@class='col-5 col-sm-3']//label[1]"));
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+}
+@When("user clicking the sign up button")
+public void userClickingTheSignUpButton() {
+
+	WebElement element = driver.findElement(By.cssSelector("div#signup>form>div:nth-of-type(7)>button"));
+	((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
+}
+
+@But("sign up should be fail")
+public void signUpShouldBeFail() {
+	String currentURL= driver.getCurrentUrl();
+	String expectedURL = "https://howzu.appkodes.in/web/login";
+	
+    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
+}
+
 
 }

@@ -1,0 +1,116 @@
+package steps;
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class PeopleNearYou {
+	
+	public WebDriver driver=hook.getdriver();
+	
+	 By email=By.id("signin_email");
+	 By password=By.id("signin_password");
+	
+	 public void logindetails(String mail, String pass) {
+			
+			driver.findElement(email).clear();
+			driver.findElement(email).sendKeys(mail);
+			
+			driver.findElement(password).clear();
+			driver.findElement(password).sendKeys(pass);
+		}
+	
+	@Then("login the account")
+	public void loginTheAccount() {
+	  
+		logindetails("kannan53@yopmail.com","123456");
+		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+
+	}
+
+	@Given("user click the filter icon")
+	public void userClickTheFilterIcon() {
+		
+		driver.findElement(By.xpath("(//div[@class='backGlow']//div)[3]")).click();
+	}
+
+	@Then("user click the gender as men")
+	public void userClickTheGenderAsMen() {
+		
+		driver.findElement(By.id("mensel")).click();
+
+	}
+
+	@Then("user unselected dating site option")
+	public void userUnselectedDatingSiteOption() {
+		
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div/div/div/div[2]/div/div[2]/div[2]/div/div[6]/div/div/img")).click();
+
+	}
+
+	@Then("user choose age as 50")
+	public void userChooseAgeAs() {
+	   
+		WebElement Slider = driver.findElement(By.xpath("(//div[@class='input-range'])[1]"));
+        Actions actions = new Actions(driver);
+
+        // Drag the minimum slider to the right
+        actions.dragAndDropBy(Slider, 50, 0).perform();
+	}
+
+	@Then("user choose distance as 50")
+	public void userChooseDistanceAs() {
+		
+		WebElement Slider = driver.findElement(By.xpath("(//div[@class='input-range'])[2]"));
+        Actions actions = new Actions(driver);
+
+        // Drag the minimum slider to the right
+        actions.dragAndDropBy(Slider, 50, 0).perform();
+		
+	}
+
+	@When("user click the save")
+	public void userClickTheSave() {
+		
+		driver.findElement(By.xpath("//button[@type='button']")).click();
+		
+	}
+
+	@Then("filter should be apply")
+	public void filterShouldBeApply() throws Throwable {
+	  
+		Thread.sleep(3000);
+		Boolean userName= driver.findElement(By.xpath("//div[text()='shirt']")).isDisplayed();
+		
+		Assert.assertTrue(userName, "UserName is not matched");
+	}
+
+}

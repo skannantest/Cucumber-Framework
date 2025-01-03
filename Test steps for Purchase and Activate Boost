@@ -1,0 +1,133 @@
+package steps;
+
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class boostActivate {
+	
+	public WebDriver driver=hook.getdriver();
+
+	 By email=By.id("signin_email");
+	 By password=By.id("signin_password");
+	
+	 public void logindetails(String mail, String pass) {
+			
+			driver.findElement(email).clear();
+			driver.findElement(email).sendKeys(mail);
+			
+			driver.findElement(password).clear();
+			driver.findElement(password).sendKeys(pass);
+		}
+	
+
+	@Given("user should be login")
+	public void userShouldBeLogin() {
+		
+		logindetails("kannan53@yopmail.com","123456");
+		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+
+	}
+
+	@Given("user should click the boost icon")
+	public void userShouldClickTheBoostIcon() {
+		
+		driver.findElement(By.xpath("//div[@class='backGlow']//button[1]")).click();
+
+		
+	}
+	
+	// purchase the boost successfully
+
+	@Then("user should choose the plan")
+	public void userShouldChooseTheFirstPlan() {
+	  
+		driver.findElement(By.xpath("(//div[@class='bold-font apk-30'])[2]")).click();
+
+	}
+
+	@Then("user click the boost me")
+	public void userClickTheBoostMe() {
+	
+		driver.findElement(By.xpath("(//li[@class='in-flex']//button)[2]")).click();
+
+	}
+
+	@When("user complete the payment")
+	public void userCompleteThePayment() throws Throwable {
+	  
+		Thread.sleep(3000);
+		WebElement iframeElement = driver.findElement(By.id("braintree-hosted-field-number"));
+		// Switch to the iframe
+		driver.switchTo().frame(iframeElement);	
+		driver.findElement(By.id("credit-card-number")).sendKeys("4111111111111111");
+		driver.switchTo().defaultContent();
+
+		WebElement iframeElement1 = driver.findElement(By.id("braintree-hosted-field-expirationDate"));
+		// Switch to the iframe
+		driver.switchTo().frame(iframeElement1);			
+		driver.findElement(By.id("expiration")).sendKeys("1226");
+		
+		driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("//button[normalize-space(text())='Buy']")).click();
+   
+	}
+
+	@Then("boost should be purchased successfully")
+	public void boostShouldBePurchasedSuccessfully() throws Throwable {
+		
+		Thread.sleep(5000);
+		Boolean alertMsg= driver.findElement(By.xpath("//div[@class='successMsg floatingAlerts1']")).isDisplayed();
+		
+		Assert.assertTrue(alertMsg, "Boost purchased is failed");
+		
+	}
+	
+	// Activae the purchased boost
+	
+	@Given("user should click the boost me")
+	public void userShouldClickTheBoostMe() {
+
+		driver.findElement(By.xpath("(//li[@class='in-flex']//button)[2]")).click();
+
+	}
+
+	@Then("boost should be activate")
+	public void boostShouldBeActivate() throws Throwable {
+		Thread.sleep(3000);
+		Boolean alertMsg= driver.findElement(By.xpath("//div[@class='boostActive pink-color']")).isDisplayed();
+		
+		Assert.assertTrue(alertMsg, "Boost purchased is failed");
+		
+	}
+
+}

@@ -1,8 +1,5 @@
 Feature:
 
-Background:
-  Given user should be navigate to the application
-
 Scenario:
 login should be fail
 

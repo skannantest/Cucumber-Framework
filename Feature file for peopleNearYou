@@ -1,0 +1,15 @@
+Feature:
+
+Background:
+     Then login the account
+
+Scenario:
+All filter should be apply
+
+    Given user click the filter icon
+    Then user click the gender as men
+    And user unselected dating site option
+    And user choose age as 50
+    Then user choose distance as 50
+    When user click the save
+    Then filter should be apply

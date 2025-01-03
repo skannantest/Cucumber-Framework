@@ -1,0 +1,24 @@
+Feature: 
+
+Background:
+
+    Then user should be login
+    And user should click the boost icon
+    
+@only    
+Scenario:
+Boost should purchase successfully
+
+    Then user should choose the plan
+    Then user click the boost me 
+    When user complete the payment
+    Then boost should be purchased successfully
+    
+ Scenario:
+ Boost should be activate successfully
+ 
+     Given user should click the boost me 
+     Then boost should be activate 
+
+
+

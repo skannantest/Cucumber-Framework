@@ -1,7 +1,6 @@
 Feature:
 
 Background:
-   Given user should navigate to the URL
    Then click the signup option 
 
 Scenario Outline:
@@ -29,7 +28,7 @@ sign up should be pass
  Examples:
  
      |name  |     email        | password|
-     |kannansh|kannan333222@yopmail.com|  123456 |
+     |kannansh|kannan53@yopmail.com|  123456 |
 
 Scenario:
 sign up should be fail 

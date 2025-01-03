@@ -51,11 +51,13 @@ public class PeopleNearYou {
 	@Then("login the account")
 	public void loginTheAccount() {
 	  
-		logindetails("kannan53@yopmail.com","123456");
+		logindetails("kannan55@yopmail.com","123456");
 		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
 
 	}
 
+	// Apply filter scenario 
+	
 	@Given("user click the filter icon")
 	public void userClickTheFilterIcon() {
 		
@@ -108,9 +110,74 @@ public class PeopleNearYou {
 	public void filterShouldBeApply() throws Throwable {
 	  
 		Thread.sleep(3000);
-		Boolean userName= driver.findElement(By.xpath("//div[text()='shirt']")).isDisplayed();
+		String currentURL = driver.getCurrentUrl();
+		String expectedURL = "https://howzu.appkodes.in/web/app/PeopleNear";
 		
-		Assert.assertTrue(userName, "UserName is not matched");
+	    Assert.assertTrue(currentURL.equals(expectedURL), "Filter apply scenario is failed");
+	}
+	
+ // Share like and dislikes to the users
+	
+	@Given("user click the like icon")
+	public void userClickTheLikeIcon() {
+		
+		driver.findElement(By.xpath("//div[@title='Like']")).click();
+		
+	}
+
+	@When("user click the dislike icon")
+	public void userClickTheDislikeIcon() {
+	 
+		driver.findElement(By.xpath("//button[@title='Dislike']")).click();
+
+	}
+
+	@Given("user click the super like icon")
+	public void userClickTheSuperLikeIcon() {
+	  
+		driver.findElement(By.xpath("//div[@title='Super like']")).click();
+
+	}
+
+	@And("user choose the second plan")
+	public void userChooseTheSecondPlan() {
+	  
+		driver.findElement(By.xpath("(//div[@class='apd10 daysPrice'])[2]")).click();
+
+	}
+
+	@And("user click continue button")
+	public void userClickContinueButton() {
+	  
+		driver.findElement(By.xpath("//div[@class='sidebarLastContent text-center']//button[1]")).click();
+
+	}
+
+	@And("user completed the payment for super like")
+	public void userCompletedThePaymentForSuperLike() throws Throwable {
+		Thread.sleep(3000);
+		WebElement iframeElement = driver.findElement(By.id("braintree-hosted-field-number"));
+		// Switch to the iframe
+		driver.switchTo().frame(iframeElement);	
+		driver.findElement(By.id("credit-card-number")).sendKeys("4111111111111111");
+		driver.switchTo().defaultContent();
+
+		WebElement iframeElement1 = driver.findElement(By.id("braintree-hosted-field-expirationDate"));
+		// Switch to the iframe
+		driver.switchTo().frame(iframeElement1);			
+		driver.findElement(By.id("expiration")).sendKeys("1226");
+		
+		driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("//button[normalize-space(text())='Buy']")).click();
+		
+	}
+
+	@Then("super like should be purchased successfully")
+	public void superLikeShouldBePurchasedSuccessfully() {
+	  
+		Boolean superlikeAlertMsg= driver.findElement(By.xpath("//div[@class='successMsg floatingAlerts1']")).isDisplayed();
+		
+		Assert.assertTrue(superlikeAlertMsg, "Super like scenario is failed");
 	}
 
 }

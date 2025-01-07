@@ -1,0 +1,160 @@
+package steps;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class NonPremium {
+	
+	public WebDriver driver=hook.getdriver();
+	
+	 By email=By.id("signin_email");
+	 By password=By.id("signin_password");
+	
+	 public void logindetails(String mail, String pass) throws Throwable {
+			
+		    Thread.sleep(1000);		
+		    driver.findElement(email).clear();
+			driver.findElement(email).sendKeys(mail);
+			
+			driver.findElement(password).clear();
+			driver.findElement(password).sendKeys(pass);
+		}
+	 
+
+@Given("User login the user account")
+public void userLoginTheUserAccount() throws Throwable {
+	
+	    logindetails("kannan53@yopmail.com","123456");
+		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+		
+}
+
+@When("user click the rewind icon")
+public void userClickTheRewindIcon() {
+    
+	driver.findElement(By.xpath("//button[@class='swiper-button-prev border-0']")).click();
+	
+}
+
+@Then("it should shows the premium popup.")
+public void itShouldShowsThePremiumPopup() throws Throwable {
+    
+	Thread.sleep(2000);
+	String ActualTitle = driver.findElement(By.xpath("//h4[@class='modal-title']")).getText();
+	String expectedTitle="Join Premium";
+
+    System.out.println(ActualTitle);
+	Assert.assertTrue(ActualTitle.equals(expectedTitle),"The give title is not matched");
+
+}
+
+//Check premium popup shows when we click the location filter on filter page
+
+@When("click the change location")
+public void clickTheChangeLocation() throws Throwable {
+	
+	driver.findElement(By.xpath("(//div[@class='backGlow']//div)[3]")).click();
+	driver.findElement(By.cssSelector("button.btn-common.w200px.mt-3")).click();
+}
+
+@Then("it shows premium popup")
+public void itShowsPremiumPopup() throws Throwable {
+   
+	itShouldShowsThePremiumPopup();
+}
+
+//Check premium popup show when we click become premium on find new people page
+
+@When("user click the become premium on find new people page")
+public void userClickTheBecomePremiumOnFindNewPeoplePage() {
+   
+	driver.findElement(By.xpath("(//div[@class='text-truncate'])[2]")).click();
+	driver.findElement(By.xpath("(//button[@class='btn-common'])[2]")).click();
+}
+
+@Then("it should show premium popup.")
+public void itShouldShowPremiumPopup() throws Throwable {
+    
+	itShouldShowsThePremiumPopup();
+
+}
+
+//Check premium popup show when we click user profile on visitor page
+
+@Given("user navigate to the visitor page")
+public void userNavigateToTheVisitorPage() {
+	
+	driver.findElement(By.xpath("(//div[@class='text-truncate'])[3]")).click();
+
+}
+
+@When("user click blur profile")
+public void userClickBlurProfile() {
+   
+	driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+
+}
+
+@Then("it should show premium popup on visitor page.")
+public void itShouldShowPremiumPopupOnVisitorPage() throws Throwable {
+    
+	itShouldShowsThePremiumPopup();
+
+}
+
+
+@Given("user navigate to the liked page and user click blur profile")
+public void userNavigateToTheVisitorPageAndClickBlurProfile() {
+   
+	driver.findElement(By.xpath("//div[text()='Likes']")).click();
+	driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+
+}
+
+@Then("it should show premium popup on liked page")
+public void itShouldShowPremiumPopupOnLikedPage() throws Throwable {
+   
+	itShouldShowsThePremiumPopup();
+
+}
+
+@When("user click become premium on footer")
+public void userClickBecomePremiumOnFooter() {
+   
+	driver.findElement(By.xpath("(//div[@class='sidebarLastContent mb-auto']//button)[1]")).click();
+}
+
+@Then("it should show premium popup on footer page.")
+public void itShouldShowPremiumPopupOnFooterPage() throws Throwable {
+    
+	itShouldShowsThePremiumPopup();
+}
+
+}

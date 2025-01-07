@@ -1,0 +1,103 @@
+package steps;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class ViewOtherProfileBefore {
+
+	public WebDriver driver=hook.getdriver();
+	
+	 By email=By.id("signin_email");
+	 By password=By.id("signin_password");
+	
+	 public void logindetails(String mail, String pass) throws Throwable {
+			
+		    Thread.sleep(1000);		
+		    driver.findElement(email).clear();
+			driver.findElement(email).sendKeys(mail);
+			
+			driver.findElement(password).clear();
+			driver.findElement(password).sendKeys(pass);
+		}
+	 @Given("user login the account")
+	 public void userLoginTheAccount() throws Throwable {
+	  
+		    logindetails("kannan54@yopmail.com","123456");
+			driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+	 }
+
+
+	 @Given("user share likes from view profile")
+	 public void userShareLikesFromViewProfile() throws Throwable {
+		 
+		
+		driver.findElement(By.xpath("(//div[@class='text-truncate'])[2]")).click();
+		driver.findElement(By.xpath("(//div[@class='peoplePic']//img)[1]")).click();
+		driver.findElement(By.xpath("//div[@title='Like']")).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath("//div[@class='mr-3']//button[1]")).click();
+
+	 }
+
+	 @Given("user share dislike from view profile")
+	 public void userShareDislikeFromViewProfile() throws Throwable {
+			
+
+		    driver.findElement(By.xpath("(//div[@class='text-truncate'])[2]")).click();
+			driver.findElement(By.xpath("(//div[@class='peoplePic']//img)[1]")).click();
+			driver.findElement(By.xpath("//div[@title='Dislike']")).click();
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//div[@class='mr-3']//button[1]")).click();
+
+	 }
+
+	 @Then("user share super like from view profile")
+	 public void userShareSuperLikeFromViewProfile() throws Throwable {
+			
+
+		   driver.findElement(By.xpath("(//div[@class='text-truncate'])[2]")).click();
+			driver.findElement(By.xpath("(//div[@class='peoplePic']//img)[1]")).click();
+			driver.findElement(By.xpath("//div[@class='superlikeButton2 mx-4']")).click();
+			Thread.sleep(1000);
+			driver.findElement(By.xpath("//div[@class='mr-3']//button[1]")).click();
+	 }
+	
+@Then("user report the another user")
+
+ public void userReportTheAnotherUser() throws Throwable{
+	
+	driver.findElement(By.xpath("(//div[@class='text-truncate'])[2]")).click();
+	driver.findElement(By.xpath("(//div[@class='peoplePic']//img)[1]")).click();
+	driver.findElement(By.xpath("//button[contains(@class,'RSoverride btn')]//div[1]")).click();
+	driver.findElement(By.xpath("//button[contains(@class,'border-0 bg-white')]")).click();
+	driver.findElement(By.xpath("//div[@class='mr-3']//button[1]")).click();
+
+}
+}

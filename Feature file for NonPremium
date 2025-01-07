@@ -1,1 +1,46 @@
+@nonpremium
+Feature: 
+
+Background: 
+
+    Given User login the user account
+
+
+Scenario: 
+User click the rewind and check premium popup shows
+
+    When user click the rewind icon
+    Then it should shows the premium popup.
+
+
+Scenario: 
+Check premium popup shows when we click the location filter on filter page
+
+    When click the change location
+    Then it shows premium popup
+    
+Scenario:
+Check premium popup show when we click become premium on find new people page
+
+    When user click the become premium on find new people page
+    Then it should show premium popup.
+ 
+Scenario:
+Check premium popup show when we click user profile on visitor page
+
+    Given user navigate to the visitor page
+    When user click blur profile
+    Then it should show premium popup on visitor page.
+
+Scenario:
+Check premium popup show when we click user profile on liked page
+
+    Given user navigate to the liked page and user click blur profile
+    Then it should show premium popup on liked page  
+    
+Scenario:
+Check premium popup show when we click become premium on footer
+
+    When user click become premium on footer 
+    Then it should show premium popup on footer page.  
 

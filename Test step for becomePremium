@@ -1,0 +1,163 @@
+package steps;
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class becomePremium {
+
+	public WebDriver driver=hook.getdriver();
+
+	 By email=By.id("signin_email");
+	 By password=By.id("signin_password");
+	
+	 public void logindetails(String mail, String pass) {
+			
+			driver.findElement(email).clear();
+			driver.findElement(email).sendKeys(mail);
+			
+			driver.findElement(password).clear();
+			driver.findElement(password).sendKeys(pass);
+		}
+	
+
+	@Given("User login into the account")
+	public void userlogintheuserAccount() {
+		
+		logindetails("kannan55@yopmail.com","123456");
+		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+
+	}
+	
+	@Given("user should go to the profile page")
+	public void userShouldGoToTheProfilePage() throws Throwable {
+
+		driver.findElement(By.cssSelector("div.text-truncate.secondaryText")).click();
+	
+	}
+
+	@Given("click the became premium on profile page")
+	public void clickTheBecamePremiumOnProfilePage() throws Throwable {
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("//div[@class='ProfileSpace']/following-sibling::div[1]")).click();
+
+	}
+
+	@Given("choose the premium plan")
+	public void chooseThePremiumPlan() {
+		driver.findElement(By.xpath("(//div[@class='bold-font apk-30']/following-sibling::div)[2]")).click();
+		driver.findElement(By.xpath("//button[@class='btn-common btn-block']")).click();
+
+	}
+
+	@When("completed the payment for premium")
+	public void completedThePaymentForPremium() throws Throwable {
+		Thread.sleep(3000);
+		WebElement iframeElement = driver.findElement(By.id("braintree-hosted-field-number"));
+		// Switch to the iframe
+		driver.switchTo().frame(iframeElement);	
+		driver.findElement(By.id("credit-card-number")).sendKeys("4111111111111111");
+		driver.switchTo().defaultContent();
+
+		WebElement iframeElement1 = driver.findElement(By.id("braintree-hosted-field-expirationDate"));
+		// Switch to the iframe
+		driver.switchTo().frame(iframeElement1);			
+		driver.findElement(By.id("expiration")).sendKeys("1226");
+		
+		driver.switchTo().defaultContent();
+		driver.findElement(By.xpath("//button[normalize-space(text())='Buy']")).click();
+	}
+
+	@Then("premium purchase successfully")
+	public void premiumPurchaseSuccessfully() {
+	    
+		Boolean getText = driver.findElement(By.xpath("//div[@class='mb-4']//div[1]")).isDisplayed();
+		
+		Assert.assertTrue(getText,"purchase premium is failed");
+	}
+
+	// Check the rewind function;
+	
+	@Given("user put dislike for the user")
+	public void userPutDislikeForTheUser() {
+		
+		driver.findElement(By.xpath("//button[@title='Dislike']")).click();
+
+	}
+
+	@When("click the rewind icon to retrieve the dislike user")
+	public void clickTheRewindIconToRetrieveTheDislikeUser() {
+
+		driver.findElement(By.xpath("//button[@class='swiper-button-prev border-0']")).click();
+
+	}
+	
+//view profile on visitor page
+
+	@Given("user go to the visitor page")
+	public void userGoToTheVisitorPage() {
+		driver.findElement(By.xpath("(//div[@class='text-truncate'])[3]")).click();
+
+	}
+
+	@When("click the first profile on visitor page")
+	public void clickTheFirstProfileOnVisitorPage() {
+		driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+
+	}
+
+	@Then("view profile works successfully on visitor")
+	public void viewProfileWorksSuccessfullyOnVisitor() throws Throwable {
+		Thread.sleep(3000);
+
+		Boolean likeOptionAvailable = driver.findElement(By.xpath("//div[@title='Like']")).isDisplayed();
+		Assert.assertTrue(likeOptionAvailable,"view profile is not working on visitor page");
+	}
+
+	//view profile on like page
+	
+	@Given("user go to the like page")
+	public void userGoToTheLikePage() {
+		driver.findElement(By.xpath("//div[text()='Likes']")).click();
+	}
+
+	@When("click the first profile on like page")
+	public void clickTheFirstProfileOnLikePage() {
+		driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+
+	}
+
+	@Then("view profile works successfully on like")
+	public void viewProfileWorksSuccessfullyOnLike() throws Throwable {
+		
+		viewProfileWorksSuccessfullyOnVisitor();
+	}
+}

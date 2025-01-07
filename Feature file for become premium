@@ -1,0 +1,37 @@
+
+Feature: 
+
+Background: 
+
+    Given User login into the account
+
+Scenario:
+purchase premium on profile page 
+
+    Given user should go to the profile page
+    And click the became premium on profile page
+    And choose the premium plan
+    When completed the payment for premium
+    Then premium purchase successfully
+
+Scenario: 
+Check the rewind is working or not. 
+
+    Given user put dislike for the user
+    When click the rewind icon to retrieve the dislike user
+
+Scenario:
+View the profile on visitor page
+
+    Given user go to the visitor page
+    When click the first profile on visitor page
+    Then view profile works successfully on visitor
+
+Scenario:
+View the profile on like page
+
+    Given user go to the like page
+    When click the first profile on like page
+    Then view profile works successfully on like
+   
+   

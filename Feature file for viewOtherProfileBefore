@@ -1,0 +1,14 @@
+Feature:
+
+Background:
+
+     Given user login the account
+    
+
+Scenario:
+Share likes,dislikes, super like and report on view other profile
+
+     Given user share likes from view profile
+     And user share dislike from view profile
+     Then user share super like from view profile
+     Then user report the another user

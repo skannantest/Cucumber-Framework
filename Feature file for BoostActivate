@@ -5,7 +5,7 @@ Background:
     Then user should be login
     And user should click the boost icon
     
-@only    
+ 
 Scenario:
 Boost should purchase successfully
 

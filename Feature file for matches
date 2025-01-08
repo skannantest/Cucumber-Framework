@@ -1,0 +1,17 @@
+
+Feature:
+
+Scenario: 
+Share super like to user on like paged
+
+      Given user login into two's user account 
+      And user view the like page and view user's profile
+      And click the super like in view profile
+
+
+Scenario:
+View the super like and check user's profile updated or not
+
+      Given user login the one's user account
+      When view the matches page and view profile
+      Then it should show user's profile page

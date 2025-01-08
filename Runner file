@@ -1,4 +1,4 @@
-package testRunner;
+package Runner;
 
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
@@ -6,14 +6,19 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
 		
-		features = {"src/test/java/features/loginsteps.features","src/test/java/features/Signup.features"},
-		//dryRun = !true,
+		features = {"src/test/java/Features/01_login.features","src/test/java/Features/02_signup.features",
+				"src/test/java/Features/04_PeopleNearYou.features","src/test/java/Features/03_boostActivate.features",
+				"src/test/java/Features/05_ViewOtherProfileBeforeMatches","src/test/java/Features/06_NonPremium",
+				"src/test/java/Features/07_BecomePremium","src/test/java/Features/08_MatchesPage",
+				"src/test/java/Features/09_MessagePage"},
+		dryRun = !true,
 	    glue = {"steps","Hooks"},
 	    snippets= SnippetType.CAMELCASE,
 	    monochrome=true,
-	    plugin= {"pretty","html:reports"}
+	    plugin= {"html:reports"}
+	 //   tags= {"@only"}
 		)
-public class runner extends AbstractTestNGCucumberTests{
 
-	
+public class runnerClass extends AbstractTestNGCucumberTests{
+
 }

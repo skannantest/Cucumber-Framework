@@ -1,0 +1,84 @@
+package steps;
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+public class Matchespage {
+
+	public WebDriver driver=hook.getdriver();
+	logindetails login=new logindetails();
+
+	@Given("user login into two's user account")
+	public void userLoginIntoTwoSUserAccount() {
+	    
+		login.logindetailTwo();
+		
+	}
+
+	@Given("user view the like page and view user's profile")
+	public void userViewTheLikePageAndViewUserSProfile() {
+	 
+		driver.findElement(By.xpath("//div[text()='Likes']")).click();
+		driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+	}
+
+	@Given("click the super like in view profile")
+	public void clickTheSuperLikeInViewProfile() throws Throwable {
+	   
+		driver.findElement(By.xpath("//div[@title='Super like']")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.xpath("//div[@class='mr-3']//button[1]")).click();
+	}
+	
+	//view the matches page
+
+	@Given("user login the one's user account")
+	public void userLoginTheOneSUserAccount() {
+	    
+		login.logindetailOne();
+	}
+
+	@When("view the matches page and view profile")
+	public void viewTheSuperLikePageAndViewProfile() {
+		
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[6]/div[2]/a/div")).click();
+		driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+	}
+
+	@Then("it should show user's profile page")
+	public void itShouldShowUserSProfilePage() throws Throwable {
+	    
+		Thread.sleep(3000);
+		Boolean superlikeViewPage= driver.findElement(By.xpath("//div[text()='kannanshsss']")).isDisplayed();
+        Assert.assertTrue(superlikeViewPage,"View profile on super like page is not working");
+	}
+
+}

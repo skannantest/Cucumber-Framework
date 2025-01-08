@@ -37,24 +37,14 @@ public class boostActivate {
 	
 	public WebDriver driver=hook.getdriver();
 
-	 By email=By.id("signin_email");
-	 By password=By.id("signin_password");
-	
-	 public void logindetails(String mail, String pass) {
-			
-			driver.findElement(email).clear();
-			driver.findElement(email).sendKeys(mail);
-			
-			driver.findElement(password).clear();
-			driver.findElement(password).sendKeys(pass);
-		}
+	logindetails login=new logindetails();
 	
 
 	@Given("user should be login")
 	public void userShouldBeLogin() {
 		
-		logindetails("kannan53@yopmail.com","123456");
-		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+		login.logindetailOne();
+		
 
 	}
 

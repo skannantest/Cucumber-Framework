@@ -1,0 +1,101 @@
+package steps;
+
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class MessagePage {
+
+	public WebDriver driver=hook.getdriver();
+
+	logindetails login=new logindetails();
+	
+	@Given("user login into the two's account")
+	public void userLoginIntoTheTwoSAccount() {
+	   
+		login.logindetailTwo();
+	}
+
+	@Given("user click the matches option to send message")
+	public void userClickTheMatchesOptionToSendMessage() {
+	   
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[6]/div[2]/a/div")).click();
+	}
+
+	@Given("user click the user's profile to send message")
+	public void userClickTheUserSProfileToSendMessage() {
+	   
+		driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+
+	}
+
+	@Given("user click the message icon")
+	public void userClickTheMessageIcon() {
+		
+		driver.findElement(By.xpath("//div[@class='circularIcoHolder circularIcoHolderMadjust']")).click();
+
+		
+	}
+
+	@Given("sending text message")
+	public void sendingTextMessageAndImage() throws Throwable {
+		
+		driver.findElement(By.id("messageinput")).sendKeys("Hi i am here to find people who really want to be in relationship");
+		driver.findElement(By.name("button")).click();
+	}
+
+	//View the message on one's account.
+	
+	@Given("user login into the one's account")
+	public void userLoginIntoTheOneSAccount() {
+	    
+		login.logindetailOne();
+	}
+
+	@When("user view the message")
+	public void userViewTheMessage() {
+	   
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[4]/div[2]/a/div")).click();
+		driver.findElement(By.xpath("(//div[@class='media-body messages-flex ']//div)[2]")).click();
+
+	}
+
+	@Then("two's message should be update here")
+	public void twoSMessageShouldBeUpdateHere() {
+	   
+		Boolean Message = driver.findElement(By.xpath("(//div[contains(@class,'mLeftChat apk-14')]//div)[1]")).isDisplayed();
+		
+		Assert.assertTrue(Message,"message is not available");
+				
+	}
+}

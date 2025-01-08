@@ -1,0 +1,31 @@
+package steps;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import Hooks.hook;
+
+public class logindetails {
+	
+	public WebDriver driver=hook.getdriver();
+	
+	public void logindetailOne() {
+		
+		driver.findElement(By.id("signin_email")).clear();
+		driver.findElement(By.id("signin_email")).sendKeys("kannan64@yopmail.com");
+		
+		driver.findElement(By.id("signin_password")).clear();
+		driver.findElement(By.id("signin_password")).sendKeys("123456");
+		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+	}
+
+	public void logindetailTwo() {
+
+		driver.findElement(By.id("signin_email")).clear();
+		driver.findElement(By.id("signin_email")).sendKeys("kannan65@yopmail.com");
+		
+		driver.findElement(By.id("signin_password")).clear();
+		driver.findElement(By.id("signin_password")).sendKeys("123456");
+		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+	}
+}

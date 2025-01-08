@@ -34,23 +34,13 @@ public class ViewOtherProfileBefore {
 
 	public WebDriver driver=hook.getdriver();
 	
-	 By email=By.id("signin_email");
-	 By password=By.id("signin_password");
+	logindetails login=new logindetails();
 	
-	 public void logindetails(String mail, String pass) throws Throwable {
-			
-		    Thread.sleep(1000);		
-		    driver.findElement(email).clear();
-			driver.findElement(email).sendKeys(mail);
-			
-			driver.findElement(password).clear();
-			driver.findElement(password).sendKeys(pass);
-		}
 	 @Given("user login the account")
 	 public void userLoginTheAccount() throws Throwable {
 	  
-		    logindetails("kannan54@yopmail.com","123456");
-			driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+			login.logindetailTwo();
+
 	 }
 
 
@@ -61,7 +51,7 @@ public class ViewOtherProfileBefore {
 		driver.findElement(By.xpath("(//div[@class='text-truncate'])[2]")).click();
 		driver.findElement(By.xpath("(//div[@class='peoplePic']//img)[1]")).click();
 		driver.findElement(By.xpath("//div[@title='Like']")).click();
-		Thread.sleep(1000);
+		Thread.sleep(2000);
 		driver.findElement(By.xpath("//div[@class='mr-3']//button[1]")).click();
 
 	 }

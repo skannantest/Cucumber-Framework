@@ -36,23 +36,13 @@ public class PeopleNearYou {
 	
 	public WebDriver driver=hook.getdriver();
 	
-	 By email=By.id("signin_email");
-	 By password=By.id("signin_password");
-	
-	 public void logindetails(String mail, String pass) {
-			
-			driver.findElement(email).clear();
-			driver.findElement(email).sendKeys(mail);
-			
-			driver.findElement(password).clear();
-			driver.findElement(password).sendKeys(pass);
-		}
+	logindetails login=new logindetails();
 	
 	@Then("login the account")
-	public void loginTheAccount() {
+	public void loginTheAccount() throws Throwable {
 	  
-		logindetails("kannan55@yopmail.com","123456");
-		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+		login.logindetailTwo();
+		
 
 	}
 
@@ -116,21 +106,7 @@ public class PeopleNearYou {
 	    Assert.assertTrue(currentURL.equals(expectedURL), "Filter apply scenario is failed");
 	}
 	
- // Share like and dislikes to the users
-	
-	@Given("user click the like icon")
-	public void userClickTheLikeIcon() {
-		
-		driver.findElement(By.xpath("//div[@title='Like']")).click();
-		
-	}
-
-	@When("user click the dislike icon")
-	public void userClickTheDislikeIcon() {
-	 
-		driver.findElement(By.xpath("//button[@title='Dislike']")).click();
-
-	}
+	// Purchase super like 
 
 	@Given("user click the super like icon")
 	public void userClickTheSuperLikeIcon() {
@@ -179,5 +155,28 @@ public class PeopleNearYou {
 		
 		Assert.assertTrue(superlikeAlertMsg, "Super like scenario is failed");
 	}
+	
+ // Share like , dislikes, super like to the users
+	
+@Given("user click the like icon")
+public void userClickTheLikeIcon() {
+			
+			driver.findElement(By.xpath("//div[@title='Like']")).click();
+			
+		}
+
+@When("user click the dislike icon")
+		public void userClickTheDislikeIcon() {
+		 
+			driver.findElement(By.xpath("//button[@title='Dislike']")).click();
+
+		}
+
+@When("user share the superlike")
+public void userShareTheSuperLike() {
+ 
+	driver.findElement(By.xpath("//div[@title='Super like']")).click();
+
+}
 
 }

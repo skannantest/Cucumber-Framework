@@ -1,0 +1,17 @@
+Feature:
+
+Scenario: 
+User send first message from matches page
+
+   Given user login into the two's account
+   And user click the matches option to send message
+   And user click the user's profile to send message
+   And user click the message icon
+   And sending text message
+   
+ Scenario:
+ View the message on one's account
+ 
+   Given user login into the one's account
+   When user view the message 
+   Then two's message should be update here

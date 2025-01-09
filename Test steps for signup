@@ -211,7 +211,7 @@ public void userAccountShouldBeSignUp() throws Throwable {
     Thread.sleep(3000);
 
 	String SignupURL= driver.getCurrentUrl();
-	String expectedTitle="https://howzu.appkodes.in/web/app/PeopleNear";
+	String expectedTitle="https://example.com/web/app/PeopleNear";
 	
 	Assert.assertTrue(SignupURL.equals(expectedTitle),"Signup test case is failed");
 	
@@ -269,7 +269,7 @@ public void userClickingTheSignUpButton() {
 public void signUpShouldBeFail() throws Throwable {
 	Thread.sleep(3000);
 	String currentURL= driver.getCurrentUrl();
-	String expectedURL = "https://howzu.appkodes.in/web/login";
+	String expectedURL = "https://example.com/web/login";
 	
     Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
 }

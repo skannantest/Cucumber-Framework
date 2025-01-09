@@ -1,12 +1,12 @@
 Feature:
 
 Background:
-   Then click the signup option 
+   Given click the signup option 
 
 Scenario Outline:
 sign up should be pass
 
-   And user enter the name as "<name>"
+   Given user enter the name as "<name>"
    And user enter the email as "<email>"
    And user enter the password as "<password>"
    Then user choose the DOB

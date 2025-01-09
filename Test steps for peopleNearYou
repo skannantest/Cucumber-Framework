@@ -101,7 +101,7 @@ public class PeopleNearYou {
 	  
 		Thread.sleep(3000);
 		String currentURL = driver.getCurrentUrl();
-		String expectedURL = "https://howzu.appkodes.in/web/app/PeopleNear";
+		String expectedURL = "https://example.com/web/app/PeopleNear";
 		
 	    Assert.assertTrue(currentURL.equals(expectedURL), "Filter apply scenario is failed");
 	}

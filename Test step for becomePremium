@@ -86,14 +86,19 @@ public class becomePremium {
 		
 		driver.switchTo().defaultContent();
 		driver.findElement(By.xpath("//button[normalize-space(text())='Buy']")).click();
+		
 	}
 
 	@Then("premium purchase successfully")
 	public void premiumPurchaseSuccessfully() throws Throwable {
 	    
+		
+		driver.findElement(By.xpath("//button[normalize-space(text())='Continue']")).click();
 		Thread.sleep(3000);
-		Boolean getText = driver.findElement(By.xpath("//div[@class='mb-4']//div[1]")).isDisplayed();
-		Assert.assertTrue(getText,"purchase premium is failed");
+		String getText= driver.findElement(By.xpath("//div[text()='Your premium membership will expire on']")).getText();
+
+		String Expected="Your premium membership will expire on January 16, 2025";
+		Assert.assertTrue(getText.equals(Expected),"purchase premium is failed");
 	}
 
 	// Check the rewind function;
@@ -130,8 +135,9 @@ public class becomePremium {
 	public void viewProfileWorksSuccessfullyOnVisitor() throws Throwable {
 
 		
-
+		Thread.sleep(3000);
 		Boolean likeOptionAvailable = driver.findElement(By.xpath("//div[@title='Like']")).isDisplayed();
+		
 		Assert.assertTrue(likeOptionAvailable,"view profile is not working on visitor page");
 	}
 

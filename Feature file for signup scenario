@@ -27,8 +27,9 @@ sign up should be pass
    
  Examples:
  
-     |name  |     email        | password|
-     |kannansh|kannan53@yopmail.com|  123456 |
+     |name    |     email          | password|
+     |kannansh|kannan74@yopmail.com|  123456 |
+     |kannandp|kannan75@yopmail.com|  123456 |
 
 Scenario:
 sign up should be fail 

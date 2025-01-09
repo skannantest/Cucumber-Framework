@@ -39,7 +39,7 @@ public class Matchespage {
 	@Given("user login into two's user account")
 	public void userLoginIntoTwoSUserAccount() {
 	    
-		login.logindetailTwo();
+		login.logindetailOne();
 		
 	}
 
@@ -63,7 +63,7 @@ public class Matchespage {
 	@Given("user login the one's user account")
 	public void userLoginTheOneSUserAccount() {
 	    
-		login.logindetailOne();
+		login.logindetailTwo();
 	}
 
 	@When("view the matches page and view profile")
@@ -77,7 +77,7 @@ public class Matchespage {
 	public void itShouldShowUserSProfilePage() throws Throwable {
 	    
 		Thread.sleep(3000);
-		Boolean superlikeViewPage= driver.findElement(By.xpath("//div[text()='kannanshsss']")).isDisplayed();
+		Boolean superlikeViewPage= driver.findElement(By.xpath("//div[text()='kannansh']")).isDisplayed();
         Assert.assertTrue(superlikeViewPage,"View profile on super like page is not working");
 	}
 

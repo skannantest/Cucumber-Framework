@@ -1,0 +1,15 @@
+Feature: 
+
+Scenario:
+Disable the age and location option
+
+     Given one's user login the account
+     And go to the settings page 
+     And enable the age and location option
+     
+Scenario:
+Check whether age and location show to the two's user
+
+     Given two's user login the account 
+     When view the one's user profile to check the age and location
+     Then age and location details should not show

@@ -1,0 +1,14 @@
+Feature:
+
+Scenario:
+
+     Given user have to login the one's account
+     And fill the details on the profile 
+     
+Scenario:
+
+     And user have to login the two's account
+     When view the profile 
+     Then added information should be displayed
+     
+     

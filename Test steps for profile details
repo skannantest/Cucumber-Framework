@@ -1,0 +1,92 @@
+package steps;
+
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class ProfileDetails {
+
+	public WebDriver driver=hook.getdriver();
+
+	logindetails login=new logindetails();
+
+	@Given("user have to login the one's account")
+	public void userHaveToLoginTheOneSAccount() {
+	    
+		login.logindetailOne();
+	}
+
+	@Given("fill the details on the profile")
+	public void fillTheDetailsOnTheProfile() {
+	   
+		driver.findElement(By.cssSelector("div.text-truncate.secondaryText")).click();
+		driver.findElement(By.xpath("//div[@class='d-flex']//div[1]")).click();
+		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[1]")).sendKeys("About");
+		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[2]")).sendKeys("Job");
+		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[3]")).sendKeys("Company");
+		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[4]")).sendKeys("School");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+
+	}
+
+	@Given("user have to login the two's account")
+	public void userHaveToLoginTheTwoSAccount() {
+	    
+		login.logindetailTwo();
+	}
+
+	@When("view the profile")
+	public void viewTheProfile() {
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[6]/div[2]/a/div")).click();
+		driver.findElement(By.xpath("//div[@class='peoplePic']//img[1]")).click();
+		
+	}
+
+	@Then("added information should be displayed")
+	public void addedInformationShouldBeDisplayed() throws Throwable {
+		
+		Thread.sleep(3000);
+		
+    Boolean job= driver.findElement(By.xpath("(//div[contains(@class,'interestsHolder apb5')])[1]")).isDisplayed();
+	Boolean company= driver.findElement(By.xpath("(//div[contains(@class,'interestsHolder apb5')])[2]")).isDisplayed();
+	Boolean school= driver.findElement(By.xpath("(//div[contains(@class,'interestsHolder apb5')])[2]")).isDisplayed();
+	Boolean about = driver.findElement(By.xpath("(//div[contains(@class,'interestsHolder apt5')]//div)[1]")).isDisplayed();
+
+	Assert.assertTrue(job,"Job is not displayed");
+	Assert.assertTrue(company,"company is not displayed");
+	Assert.assertTrue(school,"school is not displayed");
+	Assert.assertTrue(about,"about is not displayed");
+
+	}
+
+}
+

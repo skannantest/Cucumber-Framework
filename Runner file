@@ -7,16 +7,18 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 @CucumberOptions(
 		
 		features = {"src/test/java/Features/01_login.features","src/test/java/Features/02_signup.features",
-				"src/test/java/Features/04_PeopleNearYou.features","src/test/java/Features/03_boostActivate.features",
+				"src/test/java/Features/03_PeopleNearYou.features","src/test/java/Features/04_boostActivate.features",
 				"src/test/java/Features/05_ViewOtherProfileBeforeMatches","src/test/java/Features/06_NonPremium",
 				"src/test/java/Features/07_BecomePremium","src/test/java/Features/08_MatchesPage",
-				"src/test/java/Features/09_MessagePage"},
+				"src/test/java/Features/09_MessagePage","src/test/java/Features/10_ProfiledetailsAndFeeds",
+				"src/test/java/Features/11_HideAgeAndLocation"},
+	
 		dryRun = !true,
 	    glue = {"steps","Hooks"},
 	    snippets= SnippetType.CAMELCASE,
 	    monochrome=true,
-	    plugin= {"html:reports"}
-	 //   tags= {"@only"}
+	    plugin= {"html:reports"},
+	    tags= {"@only"}
 		)
 
 public class runnerClass extends AbstractTestNGCucumberTests{

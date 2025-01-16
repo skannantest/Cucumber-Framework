@@ -77,9 +77,7 @@ public class BlockAndUnfrnd {
 	@Given("user view the message page to unblock the user")
 	public void userViewTheMessagePageToUnblockTheUser() {
 	  
-		    driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[4]/div[2]/a/div")).click();
-			
-			driver.findElement(By.xpath("//div[@class='text-truncate pointCurs']")).click();
+		userViewTheMessagePageToBlockTheUser();
 	}
 
 	@When("unblock the user")
@@ -97,6 +95,33 @@ public class BlockAndUnfrnd {
         Boolean BlockedMessage = driver.findElement(By.xpath("//label[@class='attachment-file amg10']")).isEnabled(); 
 		
 		Assert.assertTrue(BlockedMessage,"Blocked message is  displayed");
+	}
+	
+	// Unfriend the user 
+	
+	@Given("user view the message page to unfriend the user")
+	public void userViewTheMessagePageToUnfriendTheUser() {
+	   
+		userViewTheMessagePageToBlockTheUser();
+
+	}
+
+	@When("unfriend the user")
+	public void unfriendTheUser() {
+	 
+		driver.findElement(By.xpath("//button[contains(@class,'RSoverride messageDropdown')]//div[1]")).click();
+		driver.findElement(By.xpath("//button[text()='Unfriend']")).click();
+		driver.findElement(By.xpath("(//button[contains(@class,'border-0 bg-white')])[1]")).click();
+    
+	}
+
+	@Then("user profile should be remove from the message page")
+	public void userProfileShouldBeRemoveFromTheMessagePage() {
+	   
+        Boolean Unfriend = driver.findElement(By.xpath("(//div[@class='messagesNull']//div)[2]")).isDisplayed(); 
+		
+		Assert.assertTrue(Unfriend,"Profile is  displayed");
+		
 	}
 
 }

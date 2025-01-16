@@ -1,0 +1,102 @@
+package steps;
+import static org.testng.Assert.expectThrows;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+
+import Hooks.hook;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.But;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class BlockAndUnfrnd {
+	
+	public WebDriver driver=hook.getdriver();
+
+	logindetails login=new logindetails();
+	
+	@Given("user have to login the one's account to report the user")
+	public void userHaveToLoginTheOneSAccountToReportTheUser() {
+	   
+		login.logindetailOne();
+	}
+
+	// Block the user 
+	
+	@Given("user view the message page to block the user")
+	public void userViewTheMessagePageToBlockTheUser() {
+        driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[4]/div[2]/a/div")).click();
+		
+		driver.findElement(By.xpath("//div[@class='text-truncate pointCurs']")).click();
+		
+	}
+
+	@When("block the user")
+	public void blockTheUser() {
+	 
+		driver.findElement(By.xpath("//button[contains(@class,'RSoverride messageDropdown')]//div[1]")).click();
+		driver.findElement(By.xpath("(//button[@class='textBtn'])[1]")).click();
+		driver.findElement(By.xpath("(//button[contains(@class,'border-0 bg-white')])[1]")).click();
+		driver.findElement(By.xpath("//div[@class='text-truncate pointCurs']")).click();
+	}
+
+	@Then("it should show the alert message on chat page")
+	public void itShouldShowTheAlertMessageOnChatPage() {
+	    
+		Boolean BlockedMessage = driver.findElement(By.xpath("//div[normalize-space(text())='Unblock to message']")).isDisplayed(); 
+		
+		Assert.assertTrue(BlockedMessage," Blocked message is not displayed");
+
+	}
+
+	// Unblock the user
+	
+	@Given("user view the message page to unblock the user")
+	public void userViewTheMessagePageToUnblockTheUser() {
+	  
+		    driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[4]/div[2]/a/div")).click();
+			
+			driver.findElement(By.xpath("//div[@class='text-truncate pointCurs']")).click();
+	}
+
+	@When("unblock the user")
+	public void unblockTheUser() {
+	    
+		driver.findElement(By.xpath("//button[contains(@class,'RSoverride messageDropdown')]//div[1]")).click();
+		driver.findElement(By.xpath("(//button[@class='textBtn'])[1]")).click();
+		driver.findElement(By.xpath("(//button[contains(@class,'border-0 bg-white')])[1]")).click();
+		driver.findElement(By.xpath("//div[@class='text-truncate pointCurs']")).click();
+	}
+
+	@Then("it should not show the alert message on chat page")
+	public void itShouldNotShowTheAlertMessageOnChatPage() {
+	    
+        Boolean BlockedMessage = driver.findElement(By.xpath("//label[@class='attachment-file amg10']")).isEnabled(); 
+		
+		Assert.assertTrue(BlockedMessage,"Blocked message is  displayed");
+	}
+
+}

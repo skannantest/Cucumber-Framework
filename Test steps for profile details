@@ -33,23 +33,28 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class ProfileDetails {
+public class ProfileDetailsAndFeeds {
 
 	public WebDriver driver=hook.getdriver();
 
 	logindetails login=new logindetails();
 
+	//Fill the profile details 
+
 	@Given("user have to login the one's account")
-	public void userHaveToLoginTheOneSAccount() {
+	public void userHaveToLoginTheOneSAccountt() {
 	    
 		login.logindetailOne();
 	}
 
 	@Given("fill the details on the profile")
-	public void fillTheDetailsOnTheProfile() {
+	public void fillTheDetailsOnTheProfile() throws Throwable {
 	   
 		driver.findElement(By.cssSelector("div.text-truncate.secondaryText")).click();
 		driver.findElement(By.xpath("//div[@class='d-flex']//div[1]")).click();
+		
+		Thread.sleep(3000);
+
 		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[1]")).sendKeys("About");
 		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[2]")).sendKeys("Job");
 		driver.findElement(By.xpath("(//textarea[contains(@class,'form-control border-bottom-only')])[3]")).sendKeys("Company");
@@ -58,8 +63,10 @@ public class ProfileDetails {
 
 	}
 
-	@Given("user have to login the two's account")
-	public void userHaveToLoginTheTwoSAccount() {
+	//Check the add details are showing on other profile
+
+	@Given("user have to login the two's account to verify the profile details")
+	public void userHaveToLoginTheTwoSAccounttoverifytheprofiledetails() {
 	    
 		login.logindetailTwo();
 	}
@@ -74,7 +81,7 @@ public class ProfileDetails {
 	@Then("added information should be displayed")
 	public void addedInformationShouldBeDisplayed() throws Throwable {
 		
-		Thread.sleep(3000);
+	Thread.sleep(3000);
 		
     Boolean job= driver.findElement(By.xpath("(//div[contains(@class,'interestsHolder apb5')])[1]")).isDisplayed();
 	Boolean company= driver.findElement(By.xpath("(//div[contains(@class,'interestsHolder apb5')])[2]")).isDisplayed();
@@ -87,6 +94,106 @@ public class ProfileDetails {
 	Assert.assertTrue(about,"about is not displayed");
 
 	}
+	
+	//Check the feed page that added details show on feed page also.
 
+	@Given("user have to login the two's account to verify on the feed page")
+	public void userHaveToLoginTheTwoSAccounttoverifyOnfeeddetails() {
+	   
+		
+		login.logindetailTwo();
+		
+	}
+
+	@And("user view the feed page")
+	public void userViewTheFeedPage() {
+	   
+		driver.findElement(By.xpath("//div[normalize-space(text())='Feeds']")).click();
+
+	}
+
+	@Then("here updated feeds should be display")
+	public void hereUpdatedFeedsShouldBeDisplay() {
+	   
+		Boolean feedlikeButton = driver.findElement(By.id("feed-1342")).isEnabled();
+
+		Assert.assertTrue(feedlikeButton,"Feed is not displayed");
+	
+	}
+	
+	//Check the like option is working or not on feed page
+	
+	@Given("user have to login the two's account to verify like on the feed page")
+	public void userHaveToLoginTheTwoSAccountToVerifyLikeOnTheFeedPage() {
+	   
+		
+		login.logindetailTwo();
+		
+	}
+
+	@Given("user view the feed page to give like")
+	public void userViewTheFeedPageToGiveLike() {
+	  
+		driver.findElement(By.xpath("//div[normalize-space(text())='Feeds']")).click();
+	}
+
+	@Then("user click the like for any feed")
+	public void userClickTheLikeForAnyFeed() {
+	   
+		 driver.findElement(By.id("feed-1342")).click();
+	}
+	
+	// Check the liked feed updated in the one's account
+
+	@Given("user have to login the {string}")
+	public void userHaveToLoginTheoneess(String string) {
+	   
+		
+		login.logindetailOne();
+		
+	}
+
+	@Given("user go the user's message page")
+	public void userGoTheUserSMessagePage() {
+	   
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[1]/div/div[3]/div[4]/div[2]/a/div")).click();
+		
+		driver.findElement(By.xpath("//div[@class='text-truncate pointCurs']")).click();
+	}
+
+	@Then("verify the liked feed is updated")
+	public void verifyTheLikedFeedIsUpdated() {
+		
+	  Boolean likedFeed = driver.findElement(By.xpath("(//div[@class='feedMsgsLiked'])[2]")).isDisplayed(); 
+	
+	  Assert.assertTrue(likedFeed,"liked Feed is not displayed");
+
+	}
+	
+	
+	//Check the message option is working or not on feed page
+
+	@Given("user have to login the two's account to check the message option")
+	public void userHaveToLoginTheTwoSAccountToCheckTheMessageOption() {
+	   
+		login.logindetailTwo();
+
+	}
+
+@Given("user view the feed page to click the message option")
+public void userViewTheFeedPageToClickTheMessageOption() {
+   
+	driver.findElement(By.xpath("//div[normalize-space(text())='Feeds']")).click();
+	driver.findElement(By.xpath("(//button[@class='currentChatDP'])[1]")).click();
+
+}
+
+	@Then("here message option is working")
+	public void hereMessageOptionIsWorking() {
+	    
+		  Boolean ProfileName = driver.findElement(By.xpath("(//div[contains(@class,'text-truncate ')])[3]")).isDisplayed(); 
+			
+		  Assert.assertTrue(ProfileName,"liked Feed is not displayed");
+	}
 }
 

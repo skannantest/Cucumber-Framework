@@ -1,0 +1,20 @@
+Feature:
+
+Background:
+
+    Given user have to login the one's account to report the user
+    
+Scenario: 
+Block the user from the message page
+
+    Given user view the message page to block the user
+    When block the user
+    Then it should show the alert message on chat page
+
+Scenario:
+Unblock the user from the message page
+
+    Given user view the message page to unblock the user
+    When unblock the user
+    Then it should not show the alert message on chat page
+    

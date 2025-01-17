@@ -113,10 +113,10 @@ public class ProfileDetailsAndFeeds {
 	}
 
 	@Then("here updated feeds should be display")
-	public void hereUpdatedFeedsShouldBeDisplay() {
+	public void hereUpdatedFeedsShouldBeDisplay() throws Throwable {
 	   
-		Boolean feedlikeButton = driver.findElement(By.id("feed-1342")).isEnabled();
-
+		Thread.sleep(3000);		
+		Boolean feedlikeButton = driver.findElement(By.xpath("(//button[@class='currentLikeDP'])[1]")).isEnabled();
 		Assert.assertTrue(feedlikeButton,"Feed is not displayed");
 	
 	}
@@ -138,9 +138,9 @@ public class ProfileDetailsAndFeeds {
 	}
 
 	@Then("user click the like for any feed")
-	public void userClickTheLikeForAnyFeed() {
-	   
-		 driver.findElement(By.id("feed-1342")).click();
+	public void userClickTheLikeForAnyFeed() throws Throwable {
+	     Thread.sleep(3000);
+		 driver.findElement(By.xpath("(//button[@class='currentLikeDP'])[1]")).click();
 	}
 	
 	// Check the liked feed updated in the one's account
@@ -164,7 +164,7 @@ public class ProfileDetailsAndFeeds {
 	@Then("verify the liked feed is updated")
 	public void verifyTheLikedFeedIsUpdated() {
 		
-	  Boolean likedFeed = driver.findElement(By.xpath("(//div[@class='feedMsgsLiked'])[2]")).isDisplayed(); 
+	  Boolean likedFeed = driver.findElement(By.xpath("//div[@class='messageImgs']//img[1]")).isDisplayed(); 
 	
 	  Assert.assertTrue(likedFeed,"liked Feed is not displayed");
 

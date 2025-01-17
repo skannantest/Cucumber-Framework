@@ -64,7 +64,7 @@ public class PeopleNearYou {
 	@Then("user unselected dating site option")
 	public void userUnselectedDatingSiteOption() {
 		
-		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div/div/div/div[2]/div/div[2]/div[2]/div/div[6]/div/div/img")).click();
+		driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[2]/div[2]/div/div[1]/div[2]/div/div/div/div/div[2]/div/div[2]/div[2]/div/div[5]/div/div/img")).click();
 
 	}
 
@@ -101,7 +101,7 @@ public class PeopleNearYou {
 	  
 		Thread.sleep(3000);
 		String currentURL = driver.getCurrentUrl();
-		String expectedURL = "https://example.com/web/app/PeopleNear";
+		String expectedURL = "https://howzu.appkodes.in/web/app/PeopleNear";
 		
 	    Assert.assertTrue(currentURL.equals(expectedURL), "Filter apply scenario is failed");
 	}

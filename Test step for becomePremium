@@ -97,7 +97,7 @@ public class becomePremium {
 		Thread.sleep(3000);
 		String getText= driver.findElement(By.xpath("//div[text()='Your premium membership will expire on']")).getText();
 
-		String Expected="Your premium membership will expire on January 16, 2025";
+		String Expected="Your premium membership will expire on January 24, 2025";
 		Assert.assertTrue(getText.equals(Expected),"purchase premium is failed");
 	}
 

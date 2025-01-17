@@ -134,16 +134,7 @@ public void userUploadThePhotoForTheProfileImage()  {
 	
     driver.findElement(By.xpath("(//span[contains(@class,'apk-18 bold-font')])[1]")).click();
 
-    /*StringSelection selection=new StringSelection("/home/hts-acer/Downloads/sam.jpg");
-	Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, null);
-	
-	Robot robot=new Robot();
-	robot.keyPress(KeyEvent.VK_CONTROL);
-	robot.keyPress(KeyEvent.VK_V);
-	robot.keyRelease(KeyEvent.VK_V);
-	robot.keyRelease(KeyEvent.VK_CONTROL);
-	robot.keyPress(KeyEvent.VK_ENTER);
-	robot.keyRelease(KeyEvent.VK_ENTER);*/
+    
 	
 }
 
@@ -211,7 +202,7 @@ public void userAccountShouldBeSignUp() throws Throwable {
     Thread.sleep(3000);
 
 	String SignupURL= driver.getCurrentUrl();
-	String expectedTitle="https://example.com/web/app/PeopleNear";
+	String expectedTitle="https://howzu.appkodes.in/web/app/PeopleNear";
 	
 	Assert.assertTrue(SignupURL.equals(expectedTitle),"Signup test case is failed");
 	
@@ -269,7 +260,7 @@ public void userClickingTheSignUpButton() {
 public void signUpShouldBeFail() throws Throwable {
 	Thread.sleep(3000);
 	String currentURL= driver.getCurrentUrl();
-	String expectedURL = "https://example.com/web/login";
+	String expectedURL = "https://howzu.appkodes.in/web/login";
 	
     Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
 }

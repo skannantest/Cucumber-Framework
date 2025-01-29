@@ -9,23 +9,55 @@ public class logindetails {
 	
 	public WebDriver driver=hook.getdriver();
 	
-	public void logindetailOne() {
+public void logindetailsone1() throws Throwable {
+	
+	driver.findElement(By.xpath("(//input[@class='inputText'])[1]")).clear();
+	driver.findElement(By.id("signin_email")).sendKeys("kannan85@yopmail.com");
+	
+	driver.findElement(By.id("signin_password")).clear();
+	driver.findElement(By.id("signin_password")).sendKeys("123456");
+	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+    Thread.sleep(2000);
+
+}
+
+	public void logindetailOne() throws Throwable {
 		
-		driver.findElement(By.id("signin_email")).clear();
-		driver.findElement(By.id("signin_email")).sendKeys("kannan74@yopmail.com");
+		logindetailsone1();
 		
-		driver.findElement(By.id("signin_password")).clear();
-		driver.findElement(By.id("signin_password")).sendKeys("123456");
-		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+		String loginfails = driver.getCurrentUrl();
+        String expectedURL="https://howzu.appkodes.in/web/login";	
+        
+if(loginfails.equals(expectedURL)) {
+	
+	logindetailsone1();
+	
+}
 	}
 
-	public void logindetailTwo() {
-
-		driver.findElement(By.id("signin_email")).clear();
-		driver.findElement(By.id("signin_email")).sendKeys("kannan75@yopmail.com");
+	public void logindetailsone2() throws Throwable {
+		
+		driver.findElement(By.xpath("(//input[@class='inputText'])[1]")).clear();
+		driver.findElement(By.id("signin_email")).sendKeys("kannan86@yopmail.com");
 		
 		driver.findElement(By.id("signin_password")).clear();
 		driver.findElement(By.id("signin_password")).sendKeys("123456");
 		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
+	    Thread.sleep(3000);
+
+	}
+
+	public void logindetailTwo() throws Throwable {
+		
+		logindetailsone2();
+		
+		String loginfails = driver.getCurrentUrl();
+        String expectedURL="https://howzu.appkodes.in/web/login";
+
+		if(loginfails.equals(expectedURL)) {
+			
+			logindetailsone2();
+			
+		}
 	}
 }

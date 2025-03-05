@@ -1,12 +1,12 @@
 Feature:
 
 Background:
-   Given click the signup option 
+   Then click the signup option 
 
 Scenario Outline:
 sign up should be pass
 
-   Given user enter the name as "<name>"
+   And user enter the name as "<name>"
    And user enter the email as "<email>"
    And user enter the password as "<password>"
    Then user choose the DOB
@@ -16,7 +16,7 @@ sign up should be pass
    And user choose the i am here to as friend
    When user click the next button
    Then user should be redirect to the upload profile page
-   And user upload the photo for the profile image
+   And user upload the photo for the "<profile>"
    Then user should be redirect to the select interest page
    And user search and choose interest as photo
    When user click the save button
@@ -27,10 +27,10 @@ sign up should be pass
    
  Examples:
  
-     |name    |     email          | password|
-     |kannansh|kannan74@yopmail.com|  123456 |
-     |kannandp|kannan75@yopmail.com|  123456 |
-
+     |name    |     email          | password|                              profile                         |
+     |kannansh|kannan90@yopmail.com|  123456 |C:\\Users\\DELLHTS209\\Downloads\\All files\\download (1).jpeg|
+     |kannandp|kannan91@yopmail.com|  123456 |C:\\Users\\DELLHTS209\\Downloads\\All files\\naessb banner.jpg|
+   
 Scenario:
 sign up should be fail 
 

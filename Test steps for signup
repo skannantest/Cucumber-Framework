@@ -36,7 +36,7 @@ import cucumber.api.java.en.When;
 
 public class signuppage{
 	
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 
 
 @Then("click the signup option")
@@ -129,13 +129,13 @@ public void userShouldBeRedirectToTheUploadProfilePage() {
 	
 }
 
-@Then("user upload the photo for the profile image")
-public void userUploadThePhotoForTheProfileImage()  {
+@Then("user upload the photo for the {string}")
+public void userUploadThePhotoForThe(String profile) {
 	
-    driver.findElement(By.xpath("(//span[contains(@class,'apk-18 bold-font')])[1]")).click();
+	WebElement fileInput = driver.findElement(By.xpath("//input[@id='file-upload']"));
 
-    
-	
+    // Provide the absolute file path to upload
+    fileInput.sendKeys(profile);
 }
 
 @Then("user should be redirect to the select interest page")

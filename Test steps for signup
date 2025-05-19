@@ -108,7 +108,7 @@ public void userShouldBeShowNextPage() throws Throwable {
 @Then("user choose the i am here to as friend")
 public void userChooseTheIAmHereToAsFriend() {
 	
-	driver.findElement(By.xpath("//img[@alt='1']")).click();
+	driver.findElement(By.xpath("//img[@alt='8']")).click();
 
 }
 

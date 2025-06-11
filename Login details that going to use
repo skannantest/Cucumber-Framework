@@ -7,15 +7,22 @@ import Hooks.hook;
 
 public class logindetails {
 	
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 	
-public void logindetailsone1() throws Throwable {
+	// Define locators
+    By email = By.id("signin_email");
+    By password = By.id("signin_password");
 	
-	driver.findElement(By.xpath("(//input[@class='inputText'])[1]")).clear();
-	driver.findElement(By.id("signin_email")).sendKeys("kannan85@yopmail.com");
 	
-	driver.findElement(By.id("signin_password")).clear();
-	driver.findElement(By.id("signin_password")).sendKeys("123456");
+public void logindetailsone1(String emailid, String pass) throws Throwable {
+	
+	
+	
+	driver.findElement(email).clear();
+	driver.findElement(email).sendKeys(emailid);
+	
+	driver.findElement(password).clear();
+	driver.findElement(password).sendKeys(pass);
 	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
     Thread.sleep(2000);
 
@@ -23,40 +30,28 @@ public void logindetailsone1() throws Throwable {
 
 	public void logindetailOne() throws Throwable {
 		
-		logindetailsone1();
+		logindetailsone1("kannan97@yopmail.com", "123456");
 		
 		String loginfails = driver.getCurrentUrl();
         String expectedURL="https://howzu.appkodes.in/web/login";	
         
 if(loginfails.equals(expectedURL)) {
 	
-	logindetailsone1();
+	logindetailsone1("kannan97@yopmail.com", "123456");
 	
 }
 	}
 
-	public void logindetailsone2() throws Throwable {
-		
-		driver.findElement(By.xpath("(//input[@class='inputText'])[1]")).clear();
-		driver.findElement(By.id("signin_email")).sendKeys("kannan86@yopmail.com");
-		
-		driver.findElement(By.id("signin_password")).clear();
-		driver.findElement(By.id("signin_password")).sendKeys("123456");
-		driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
-	    Thread.sleep(3000);
-
-	}
-
 	public void logindetailTwo() throws Throwable {
 		
-		logindetailsone2();
+		logindetailsone1("kannan98@yopmail.com", "123456");
 		
 		String loginfails = driver.getCurrentUrl();
         String expectedURL="https://howzu.appkodes.in/web/login";
 
 		if(loginfails.equals(expectedURL)) {
 			
-			logindetailsone2();
+			logindetailsone1("kannan98@yopmail.com", "123456");
 			
 		}
 	}

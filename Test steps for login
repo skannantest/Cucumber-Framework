@@ -1,101 +1,65 @@
-
 package steps;
-
-import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import Hooks.hook;
-import cucumber.api.java.After;
-import cucumber.api.java.Before;
-import cucumber.api.java.en.And;
-import cucumber.api.java.en.But;
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.Then;
-import cucumber.api.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class loginpage {
+public class logindetails {
 	
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
+	
+	
+	// Define locators
+    By email = By.id("signin_email");
+    By password = By.id("signin_password");
+	
+	// path for the login fields
+public void logindetailsone1(String emailid, String pass) {
+	
+	
+	
+	driver.findElement(email).clear();
+	driver.findElement(email).sendKeys(emailid);
+	
+	driver.findElement(password).clear();
+	driver.findElement(password).sendKeys(pass);
+	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
 
-	 By email=By.id("signin_email");
-	 By password=By.id("signin_password");
+}
+     // first login ID
+	public void logindetailOne() throws Throwable {
+		
+		
+		logindetailsone1("kannan95@yopmail.com", "123456");
+        Thread.sleep(3000);
+
+        //if the url loads before clear action, this clear and login script will run again 
+        
+		String loginfails = driver.getCurrentUrl();
+        String expectedURL="https://howzu.appkodes.in/web/login";	
+        
+if(loginfails.equals(expectedURL)) {
 	
-	 public void logindetails(String mail, String pass) {
+	logindetailsone1("kannan95@yopmail.com", "123456");
+	
+}
+	}
+
+	public void logindetailTwo() throws Throwable {
+		
+		logindetailsone1("kannan96@yopmail.com", "123456");
+        Thread.sleep(3000);
+
+        //if the url loads before clear action, this clear and login script will run again 
+
+		String loginfails = driver.getCurrentUrl();
+        String expectedURL="https://howzu.appkodes.in/web/login";
+
+		if(loginfails.equals(expectedURL)) {
 			
-			driver.findElement(email).clear();
-			driver.findElement(email).sendKeys(mail);
+			logindetailsone1("kannan96@yopmail.com", "123456");
 			
-			driver.findElement(password).clear();
-			driver.findElement(password).sendKeys(pass);
 		}
-	 
-// Login the account which is not registered
-
-@And("user enter the invalid credential")
-public void userEnterTheInvalidLogin() {
-	
-	logindetails("a@yopmail","abcds");
-}
-@When("user click the login button")
-public void userClickTheLoginButton() {
-	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
-}
-
-@But("login should be fail")
-public void loginShouldBeFail() {
-	
-	String currentURL = driver.getCurrentUrl();
-	String expectedURL = "https://example.com/web/login"; // Replace with the expected URL
-
-	// Assert that the current URL equals the expected URL
-    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
-}
-
-// Login without data 
-
-@And("user click the login button without enter the email and password")
-public void userclickloginwithoutdata() {
-	logindetails("","");
-}
-@Then("login should fail")
-public void loginShouldFail() {
-	String currentURL = driver.getCurrentUrl();
-	String expectedURL = "https://example.com/web/login"; // Replace with the expected URL
-
-	// Assert that the current URL equals the expected URL
-    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
-}
-
-// Login the valid account details 
-
-
-@And("user enter the valid credential")
-public void userEnterThevalidLogin()  {
-	
-	logindetails("demo@example.com","123456");
-}
-@When("user click login button")
-public void userClickLoginButton(){
-	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
-}
-
-@But("login should be pass")
-public void loginShouldBePass() throws Throwable {
-	Thread.sleep(3000);
-
-	String currentURL = driver.getCurrentUrl();
-	String expectedURL = "https://example.com/web/app"; // Replace with the expected URL
-
-	// Assert that the current URL equals the expected URL
-    Assert.assertTrue(currentURL.equals(expectedURL), "The URL does not match the expected value.");
-
-}
-
-
+	}
 }

@@ -34,15 +34,15 @@ import cucumber.api.java.en.When;
 
 public class becomePremium {
 
-	public WebDriver driver=hook.getdriver();
-
+	public WebDriver driver = hook.driver;
+	
 	logindetails login=new logindetails();
 
 	
 // User become premium
 	
 	@Given("User login into the account")
-	public void userlogintheuserAccount() {
+	public void userlogintheuserAccount() throws Throwable  {
 		
 		login.logindetailOne();
 		
@@ -50,7 +50,7 @@ public class becomePremium {
 	}
 	
 	@Given("user should go to the profile page")
-	public void userShouldGoToTheProfilePage() throws Throwable {
+	public void userShouldGoToTheProfilePage() {
 
 		driver.findElement(By.cssSelector("div.text-truncate.secondaryText")).click();
 	
@@ -95,10 +95,10 @@ public class becomePremium {
 		
 		driver.findElement(By.xpath("//button[normalize-space(text())='Continue']")).click();
 		Thread.sleep(3000);
-		String getText= driver.findElement(By.xpath("//div[text()='Your premium membership will expire on']")).getText();
+		String PremiumExpiredDate= driver.findElement(By.xpath("//div[text()='Your premium membership will expire on']")).getText();
 
-		String Expected="Your premium membership will expire on January 24, 2025";
-		Assert.assertTrue(getText.equals(Expected),"purchase premium is failed");
+		String Expected="Your premium membership will expire on February 5, 2025";
+		Assert.assertTrue(PremiumExpiredDate.equals(Expected),"purchase premium is failed");
 	}
 
 	// Check the rewind function;

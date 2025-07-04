@@ -49,14 +49,15 @@ public class PeopleNearYou {
 	// Apply filter scenario 
 	
 	@Given("user click the filter icon")
-	public void userClickTheFilterIcon() {
+	public void userClickTheFilterIcon() throws Throwable  {
 		
-		driver.findElement(By.xpath("(//div[@class='backGlow']//div)[3]")).click();
+		driver.findElement(By.xpath("//div[contains(@class,'sidebarIcoPos filterIcon')]")).click();
 	}
 
 	@Then("user click the gender as men")
-	public void userClickTheGenderAsMen() {
-		
+	public void userClickTheGenderAsMen() throws Throwable {
+		Thread.sleep(3000);
+
 		driver.findElement(By.id("mensel")).click();
 
 	}
@@ -64,7 +65,7 @@ public class PeopleNearYou {
 	@Then("user unselected dating site option")
 	public void userUnselectedDatingSiteOption() {
 		
-		driver.findElement(By.xpath("(//img[@class='navigation--active'])[3]")).click();
+		driver.findElement(By.xpath("(//div[contains(@class,'iconimg apd10')]//img)[2]")).click();
 
 	}
 
@@ -90,20 +91,23 @@ public class PeopleNearYou {
 	}
 
 	@When("user click the save")
-	public void userClickTheSave() {
-		
-		driver.findElement(By.xpath("//button[@type='button']")).click();
-		
+	public void userClickTheSave() throws Throwable {	
+
+		driver.findElement(By.xpath("//div[@class='backGlow mr-2']")).click();
+		Thread.sleep(3000);
+	
 	}
 
 	@Then("filter should be apply")
-	public void filterShouldBeApply() throws Throwable {
+	public void filterShouldBeApply() throws Throwable  {
 	  
-		Thread.sleep(3000);
+
 		String currentURL = driver.getCurrentUrl();
 		String expectedURL = "https://howzu.appkodes.in/web/app/PeopleNear";
 		
+
 	    Assert.assertTrue(currentURL.equals(expectedURL), "Filter apply scenario is failed");
+	    
 	}
 	
 	// Purchase super like 
@@ -118,7 +122,7 @@ public class PeopleNearYou {
 	@And("user choose the second plan")
 	public void userChooseTheSecondPlan() {
 	  
-		driver.findElement(By.xpath("(//div[@class='apd10 daysPrice'])[2]")).click();
+		driver.findElement(By.xpath("(//div[@class='apd10 daysPrice']//div)[3]")).click();
 
 	}
 

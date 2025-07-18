@@ -35,14 +35,14 @@ import cucumber.api.java.en.When;
 
 public class ProfileDetailsAndFeeds {
 
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 
 	logindetails login=new logindetails();
 
 	//Fill the profile details 
 
 	@Given("user have to login the one's account")
-	public void userHaveToLoginTheOneSAccountt() {
+	public void userHaveToLoginTheOneSAccountt() throws Throwable {
 	    
 		login.logindetailOne();
 	}
@@ -66,7 +66,7 @@ public class ProfileDetailsAndFeeds {
 	//Check the add details are showing on other profile
 
 	@Given("user have to login the two's account to verify the profile details")
-	public void userHaveToLoginTheTwoSAccounttoverifytheprofiledetails() {
+	public void userHaveToLoginTheTwoSAccounttoverifytheprofiledetails() throws Throwable {
 	    
 		login.logindetailTwo();
 	}
@@ -98,7 +98,7 @@ public class ProfileDetailsAndFeeds {
 	//Check the feed page that added details show on feed page also.
 
 	@Given("user have to login the two's account to verify on the feed page")
-	public void userHaveToLoginTheTwoSAccounttoverifyOnfeeddetails() {
+	public void userHaveToLoginTheTwoSAccounttoverifyOnfeeddetails() throws Throwable {
 	   
 		
 		login.logindetailTwo();
@@ -124,7 +124,7 @@ public class ProfileDetailsAndFeeds {
 	//Check the like option is working or not on feed page
 	
 	@Given("user have to login the two's account to verify like on the feed page")
-	public void userHaveToLoginTheTwoSAccountToVerifyLikeOnTheFeedPage() {
+	public void userHaveToLoginTheTwoSAccountToVerifyLikeOnTheFeedPage() throws Throwable {
 	   
 		
 		login.logindetailTwo();
@@ -146,7 +146,7 @@ public class ProfileDetailsAndFeeds {
 	// Check the liked feed updated in the one's account
 
 	@Given("user have to login the {string}")
-	public void userHaveToLoginTheoneess(String string) {
+	public void userHaveToLoginTheoneess(String string) throws Throwable {
 	   
 		
 		login.logindetailOne();
@@ -174,7 +174,7 @@ public class ProfileDetailsAndFeeds {
 	//Check the message option is working or not on feed page
 
 	@Given("user have to login the two's account to check the message option")
-	public void userHaveToLoginTheTwoSAccountToCheckTheMessageOption() {
+	public void userHaveToLoginTheTwoSAccountToCheckTheMessageOption() throws Throwable {
 	   
 		login.logindetailTwo();
 
@@ -191,7 +191,7 @@ public void userViewTheFeedPageToClickTheMessageOption() {
 	@Then("here message option is working")
 	public void hereMessageOptionIsWorking() {
 	    
-		  Boolean ProfileName = driver.findElement(By.xpath("(//div[contains(@class,'text-truncate ')])[3]")).isDisplayed(); 
+		  Boolean ProfileName = driver.findElement(By.xpath("//div[contains(@class,'feedMsgContent pFHidden')]/following-sibling::div[1]")).isDisplayed(); 
 			
 		  Assert.assertTrue(ProfileName,"liked Feed is not displayed");
 	}

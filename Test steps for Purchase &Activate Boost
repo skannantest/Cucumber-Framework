@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.bouncycastle.oer.its.ieee1609dot2.basetypes.Duration;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -35,13 +36,13 @@ import cucumber.api.java.en.When;
 
 public class boostActivate {
 	
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 
 	logindetails login=new logindetails();
 	
 
 	@Given("user should be login")
-	public void userShouldBeLogin() {
+	public void userShouldBeLogin() throws Throwable {
 		
 		login.logindetailOne();
 		
@@ -61,13 +62,14 @@ public class boostActivate {
 	@Then("user should choose the plan")
 	public void userShouldChooseTheFirstPlan() {
 	  
-		driver.findElement(By.xpath("(//div[@class='bold-font apk-30'])[2]")).click();
+		driver.findElement(By.xpath("(//div[@class='apd10 daysPrice']//div)[1]")).click();
 
 	}
 
 	@Then("user click the boost me")
 	public void userClickTheBoostMe() {
 	
+		
 		driver.findElement(By.xpath("(//li[@class='in-flex']//button)[2]")).click();
 
 	}
@@ -95,7 +97,7 @@ public class boostActivate {
 	@Then("boost should be purchased successfully")
 	public void boostShouldBePurchasedSuccessfully() throws Throwable {
 		
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 		Boolean alertMsg= driver.findElement(By.xpath("//div[@class='successMsg floatingAlerts1']")).isDisplayed();
 		
 		Assert.assertTrue(alertMsg, "Boost purchased is failed");
@@ -105,8 +107,9 @@ public class boostActivate {
 	// Activae the purchased boost
 	
 	@Given("user should click the boost me")
-	public void userShouldClickTheBoostMe() {
-
+	public void userShouldClickTheBoostMe() throws Throwable {
+ 
+		Thread.sleep(3000);
 		driver.findElement(By.xpath("(//li[@class='in-flex']//button)[2]")).click();
 
 	}

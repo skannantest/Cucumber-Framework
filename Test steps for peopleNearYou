@@ -58,7 +58,7 @@ public class PeopleNearYou {
 	public void userClickTheGenderAsMen() throws Throwable {
 		Thread.sleep(3000);
 
-		driver.findElement(By.id("mensel")).click();
+		driver.findElement(By.id("womensel")).click();
 
 	}
 
@@ -162,7 +162,7 @@ public class PeopleNearYou {
 	
  // Share like , dislikes, super like to the users
 	
-@Given("user click the like icon")
+	@Given("user click the like icon")
 public void userClickTheLikeIcon() {
 			
 			driver.findElement(By.xpath("//div[@title='Like']")).click();

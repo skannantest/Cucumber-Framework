@@ -9,12 +9,13 @@ public class logindetails {
 	
 	public WebDriver driver = hook.driver;
 	
+	
 	// Define locators
     By email = By.id("signin_email");
     By password = By.id("signin_password");
 	
-	
-public void logindetailsone1(String emailid, String pass) throws Throwable {
+	// path for the login fields
+public void logindetailsone1(String emailid, String pass) {
 	
 	
 	
@@ -24,34 +25,43 @@ public void logindetailsone1(String emailid, String pass) throws Throwable {
 	driver.findElement(password).clear();
 	driver.findElement(password).sendKeys(pass);
 	driver.findElement(By.xpath("(//button[@type='submit'])[1]")).click();
-    Thread.sleep(2000);
 
 }
-
+     // first login ID
 	public void logindetailOne() throws Throwable {
 		
-		logindetailsone1("kannan97@yopmail.com", "123456");
+		String login1= "kannan130@yopmail.com";
 		
+		logindetailsone1(login1, "123456");
+        Thread.sleep(3000);
+
+        //if the url loads before clear action, this clear and login script will run again 
+        
 		String loginfails = driver.getCurrentUrl();
         String expectedURL="https://howzu.appkodes.in/web/login";	
         
 if(loginfails.equals(expectedURL)) {
 	
-	logindetailsone1("kannan97@yopmail.com", "123456");
+	logindetailsone1(login1, "123456");
 	
 }
 	}
 
 	public void logindetailTwo() throws Throwable {
 		
-		logindetailsone1("kannan98@yopmail.com", "123456");
-		
+		String login2= "kannan131@yopmail.com";
+
+		logindetailsone1(login2, "123456");
+        Thread.sleep(3000);
+
+        //if the url loads before clear action, this clear and login script will run again 
+
 		String loginfails = driver.getCurrentUrl();
         String expectedURL="https://howzu.appkodes.in/web/login";
 
 		if(loginfails.equals(expectedURL)) {
 			
-			logindetailsone1("kannan98@yopmail.com", "123456");
+			logindetailsone1(login2, "123456");
 			
 		}
 	}

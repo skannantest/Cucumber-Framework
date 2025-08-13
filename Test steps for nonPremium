@@ -32,7 +32,7 @@ import cucumber.api.java.en.When;
 
 public class NonPremium {
 	
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 	
 	logindetails login=new logindetails();
 

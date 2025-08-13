@@ -36,12 +36,12 @@ import cucumber.api.java.en.When;
 
 public class MessagePage {
 
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 
 	logindetails login=new logindetails();
 	
 	@Given("user login into the two's account")
-	public void userLoginIntoTheTwoSAccount() {
+	public void userLoginIntoTheTwoSAccount() throws Throwable {
 	   
 		login.logindetailTwo();
 	}
@@ -77,7 +77,7 @@ public class MessagePage {
 	//View the message on one's account.
 	
 	@Given("user login into the one's account")
-	public void userLoginIntoTheOneSAccount() {
+	public void userLoginIntoTheOneSAccount() throws Throwable {
 	    
 		login.logindetailOne();
 	}

@@ -37,14 +37,14 @@ import cucumber.api.java.en.When;
 
 public class HideAgeAndLocation {
 
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 
 	logindetails login=new logindetails();
 	
 	@Given("one's user login the account")
-	public void oneSUserLoginTheAccount() {
+	public void oneSUserLoginTheAccount() throws Throwable {
 	  login.logindetailOne();
-	 
+	 ;
 	}
 
 	@Given("go to the settings page")
@@ -66,7 +66,7 @@ public class HideAgeAndLocation {
 	}
 
 	@Given("two's user login the account")
-	public void twoSUserLoginTheAccount() {
+	public void twoSUserLoginTheAccount() throws Throwable {
 	   login.logindetailTwo();
 	}
 

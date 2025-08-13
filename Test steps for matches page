@@ -33,11 +33,11 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 public class Matchespage {
 
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 	logindetails login=new logindetails();
 
 	@Given("user login into two's user account")
-	public void userLoginIntoTwoSUserAccount() {
+	public void userLoginIntoTwoSUserAccount() throws Throwable {
 	    
 		login.logindetailOne();
 		
@@ -61,7 +61,7 @@ public class Matchespage {
 	//view the matches page
 
 	@Given("user login the one's user account")
-	public void userLoginTheOneSUserAccount() {
+	public void userLoginTheOneSUserAccount() throws Throwable {
 	    
 		login.logindetailTwo();
 	}
@@ -77,7 +77,7 @@ public class Matchespage {
 	public void itShouldShowUserSProfilePage() throws Throwable {
 	    
 		Thread.sleep(3000);
-		Boolean superlikeViewPage= driver.findElement(By.xpath("//div[text()='kannansh']")).isDisplayed();
+		Boolean superlikeViewPage= driver.findElement(By.xpath("//div[text()='kannan']")).isDisplayed();
         Assert.assertTrue(superlikeViewPage,"View profile on super like page is not working");
 	}
 

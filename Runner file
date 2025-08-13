@@ -1,26 +1,32 @@
 package Runner;
 
+import org.junit.runner.RunWith;
+
 import cucumber.api.CucumberOptions;
 import cucumber.api.SnippetType;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 
 @CucumberOptions(
 		
-		features = {"src/test/java/Features/01_login.features","src/test/java/Features/02_signup.features",
+	features = {"src/test/java/Features/01_login.features","src/test/java/Features/02_signup.features",
 				"src/test/java/Features/03_PeopleNearYou.features","src/test/java/Features/04_boostActivate.features",
 				"src/test/java/Features/05_ViewOtherProfileBeforeMatches","src/test/java/Features/06_NonPremium",
 				"src/test/java/Features/07_BecomePremium","src/test/java/Features/08_MatchesPage",
 				"src/test/java/Features/09_MessagePage","src/test/java/Features/10_ProfiledetailsAndFeeds",
-				"src/test/java/Features/11_HideAgeAndLocation"},
+				"src/test/java/Features/11_HideAgeAndLocation","src/test/java/Features/12_blockAndunfrnd"},
 	
-		dryRun = !true,
+	
+		dryRun = !true, // used to check whether we create method for all feature file.
 	    glue = {"steps","Hooks"},
-	    snippets= SnippetType.CAMELCASE,
-	    monochrome=true,
-	    plugin= {"html:reports"},
-	    tags= {"@only"}
+	    snippets= SnippetType.CAMELCASE, // used to get method in small letter to copy (console)
+	    monochrome=true, // used to clear unwanted in the console
+	    plugin= {"html:reports"} // used to generate the report
+	  // tags= {"@only"} // used to run only mentioned tag feature file or scenario in feature
+	
+	
 		)
 
-public class runnerClass extends AbstractTestNGCucumberTests{
+public class runnerClass extends AbstractTestNGCucumberTests{ 
+	
 
 }

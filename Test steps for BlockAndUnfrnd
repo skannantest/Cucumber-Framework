@@ -34,12 +34,12 @@ import cucumber.api.java.en.When;
 
 public class BlockAndUnfrnd {
 	
-	public WebDriver driver=hook.getdriver();
+	public WebDriver driver = hook.driver;
 
 	logindetails login=new logindetails();
 	
 	@Given("user have to login the one's account to report the user")
-	public void userHaveToLoginTheOneSAccountToReportTheUser() {
+	public void userHaveToLoginTheOneSAccountToReportTheUser() throws Throwable {
 	   
 		login.logindetailOne();
 	}

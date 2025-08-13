@@ -3,6 +3,7 @@ package Hooks;
 
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -17,11 +18,19 @@ public class hook {
 	public static WebDriver driver;
     
 	@Before
-	public void broweserLaunch(Scenario scenario) {
+	public void broweserLaunch() throws Throwable {
 		 	
            WebDriverManager.chromedriver().setup();
 		   driver = new ChromeDriver();
-			driver.get("https://example.com/login");
+			driver.get("https://howzu.appkodes.in/web");
+			String failed = driver.getCurrentUrl();
+			Thread.sleep(3000);
+			driver.findElement(By.xpath("//a[contains(@class,'btnsWelcome border-radius')]")).click();
+			if(failed.equals("https://howzu.appkodes.in/web")) {
+				
+				driver.findElement(By.xpath("//div[@id='welcome']/following-sibling::a[1]")).click();
+
+			}
 		  	driver.manage().window().maximize();
 		  	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		 }
@@ -36,7 +45,5 @@ public void afterscenario(Scenario scenario) {
 		}
 	        driver.quit();
 	}
-	public static WebDriver getdriver() {
-		return driver;
-	}
+	
 }
